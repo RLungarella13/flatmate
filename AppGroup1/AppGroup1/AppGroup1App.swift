@@ -7,7 +7,11 @@
 
 import SwiftUI
 //Ok posso modificarlo
+<<<<<<< Updated upstream
 kCIApplyOptionExtent
+=======
+//Sono davidone
+>>>>>>> Stashed changes
 @main
 struct AppGroup1App: App {
     var body: some Scene {
