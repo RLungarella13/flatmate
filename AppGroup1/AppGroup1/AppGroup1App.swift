@@ -7,6 +7,7 @@
 
 import SwiftUI
 //Ok posso modificarlo
+kCIApplyOptionExtent
 @main
 struct AppGroup1App: App {
     var body: some Scene {
