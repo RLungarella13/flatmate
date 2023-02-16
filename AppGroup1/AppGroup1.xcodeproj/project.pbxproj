@@ -98,10 +98,10 @@
 		6D291C16299CD7ED00220F66 /* AppGroup1 */ = {
 			isa = PBXGroup;
 			children = (
+				6D291C19299CD7ED00220F66 /* ContentView.swift */,
 				6D291C17299CD7ED00220F66 /* AppGroup1App.swift */,
 				6DD03FF2299D22F100B1063A /* Person.swift */,
 				6DD03FF0299D223C00B1063A /* Home.swift */,
-				6D291C19299CD7ED00220F66 /* ContentView.swift */,
 				6D291C1B299CD7EE00220F66 /* Assets.xcassets */,
 				6D291C1D299CD7EE00220F66 /* Preview Content */,
 			);
