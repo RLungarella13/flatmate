@@ -9,20 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationView{
-            VStack(){
-                HStack{
-                    ForEach(0..<3){ index in
-                        Image(systemName: "person.crop.circle")
-                            .imageScale(.large)
-                    }
-                    
-                }
+        NavigationView {
+            VStack {
+              
             }
-            .navigationTitle("Transactions")
-            .navigationBarItems (trailing: Button(action: {/*showSearchView.toggle()*/}, label: {Image(systemName: "magnifyingglass")}))
+            .navigationBarTitle("Cashflow")
+            .navigationBarItems(trailing:
+                Button(action: {
+                    // Gestione azione del pulsante di ricerca
+                }) {
+                    Image(systemName: "magnifyingglass")
+                }
+            )
         }
-        
     }
 }
 

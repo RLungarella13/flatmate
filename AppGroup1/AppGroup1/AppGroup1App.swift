@@ -15,3 +15,4 @@ struct AppGroup1App: App {
         }
     }
 }
+
