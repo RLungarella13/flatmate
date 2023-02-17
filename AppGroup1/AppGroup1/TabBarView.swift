@@ -22,9 +22,11 @@ struct TabBarView: View {
                     Text("Spese")
                 }
             Text("Profilo")
+                
                 .tabItem {
                     Image(systemName: "person.circle")
                     Text("Profilo")
+                
                     
             }
             

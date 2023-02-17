@@ -12,56 +12,33 @@ struct ContentView: View {
     @State private var showAddTransaction = false
     var body: some View {
         VStack (){
-            
+            //Titolo centrale con tasto di ricerca
             titleHomeView()
-            Spacer()
-            ClickableHStack()
+            ClickableHStack()//Rettangolo con la visualizzazione dei membri
                 .background(Color.white)
                 .cornerRadius(10)
                 .shadow(radius: 4)
                 .padding()
-            
-            TransactionSection()
-            
+            TransactionSection()//Lista delle transazioni
             Spacer()
-            
-            .padding(15.0)
-            .font(.system(size: 30, weight: .bold))
-            .foregroundColor(.black)
-            .navigationBarItems(trailing:
-                                    Button(action: {
-                // Gestione dell'azione del pulsante di ricerca
-            }) {
-                Image(systemName: "magnifyingglass")
-            }
-            )
-            .overlay(
+            HStack{
+                Spacer()
                 Button(action: {
                     self.showAddTransaction = true
-                    //da aggiungere l'azione
-                }) {
+                    //Aggiunta della transazione
+                }){
                     Image(systemName: "plus")
                         .font(.system(size: 24))
                         .foregroundColor(.white)
                         .padding()
                         .background(Color.blue)
                         .clipShape(Circle())
-                        .padding(16)
                         .shadow(radius: 4)
-                        .padding(.leading, 16)
-                    
-                    
                 }
-                    .padding(.trailing, 16)
-                    .padding(.bottom, 16),
-                alignment: .bottomTrailing
-            )
-            
-            .sheet(isPresented: $showAddTransaction) {
-                // Aggiungi la vista per aggiungere una transazione
-            }
-            
-            
+                .sheet(isPresented: $showAddTransaction) {
+                    // Aggiungi la vista per aggiungere una transazione
+                }
+            }.padding(30)
             
         }
     }
@@ -81,16 +58,20 @@ struct TransactionSection: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Transazioni")
+                Text("Transactions")
                     .font(.system(size: 24))
                     .bold()
                 Spacer()
-                Text("Vedi tutte")
+                Text("Show All")
                     .font(.system(size: 18))
                     .foregroundColor(.blue)
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 16)
+            .padding()
+            List{
+                ForEach(0..<4){index in
+                    Text("Daje")
+                }
+            }
             
             // Inserire qui la lista delle transazioni
         }
@@ -144,6 +125,7 @@ struct CustomNavBar<Left, Center, Right>: View where Left: View, Center: View, R
 
 struct titleHomeView: View{
     let buttonSize: CGFloat = 30
+    @State private var showSearchView = false
     var body: some View {
         VStack {
             CustomNavBar(left: {}, center: {
@@ -158,21 +140,22 @@ struct titleHomeView: View{
     
             }, right: {
                 HStack {
-                    Image(systemName: "magnifyingglass")
-                        .resizable()
-                        .frame(width: 30, height: 30, alignment: .center)
-                        .padding(.trailing)
+                    Button(action: {showSearchView.toggle()}){
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .frame(width: 30, height: 30, alignment: .center)
+                            .padding(.trailing)
+                    }
                 }
                 .foregroundColor(.accentColor)
             })
             .padding()
+            .fullScreenCover(isPresented: $showSearchView){
+                //SearchView()
+            }
         }
     }
 }
-
-
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
