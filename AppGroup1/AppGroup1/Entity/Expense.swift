@@ -9,11 +9,18 @@ import Foundation
 
 class Expense{
     let uid: UUID
-    var creditor: Person
-    var debtors: [Person]
     var total: Double
-    var paid: Double
+    var contributors: [Int : Double]
     var Date: Date
     var title: String
     var desc: String
+    init(uid: UUID, creditor: Person, debtors: [Person], total: Double, paid: Double,
+         contributors: [Int : Double], Date: Date, title: String, desc: String) {
+        self.uid = uid
+        self.total = total
+        self.contributors = contributors
+        self.Date = Date
+        self.title = title
+        self.desc = desc
+    }
 }

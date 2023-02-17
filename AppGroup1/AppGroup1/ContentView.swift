@@ -8,19 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    var buttonSize = 30
+    
     var body: some View {
-        VStack (){
-            //Titolo centrale con tasto di ricerca
-            titleHomeView()
-            ClickableHStack()//Rettangolo con la visualizzazione dei membri
-                .background(Color.white)
-                .cornerRadius(10)
-                .shadow(radius: 4)
-                .padding()
-            TransactionSection()//Lista delle transazioni
-            Spacer()
-            floatingAddButton()
+        ZStack{
+            VStack (){
+                //Titolo centrale con tasto di ricerca
+                titleHomeView()
+                ClickableHStack()//Rettangolo con la visualizzazione dei membri
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 4)
+                    .padding()
+                TransactionSection()//Lista delle transazioni
+                Spacer()
+                
+            }
+            VStack{
+                Spacer()
+                HStack{
+                    Spacer()
+                    floatingAddButton()
+                }
+            }
+            .padding(40)
         }
     }
     
@@ -46,7 +56,8 @@ struct TransactionSection: View {
                 Spacer()
                 Text("Show All")
                     .font(.system(size: 18))
-                    .foregroundColor(.blue)
+                    .foregroundColor(.accentColor)
+                
             }
             .padding()
             List{
@@ -135,7 +146,7 @@ struct titleHomeView: View{
             })
             .padding()
             .fullScreenCover(isPresented: $showSearchView){
-                //SearchView()
+                SearchView()
             }
         }
     }
@@ -180,23 +191,21 @@ struct TransactionCell: View{
 struct floatingAddButton: View{
     @State private var showAddTransaction = false
     var body: some View{
-        HStack{
-            Spacer()
-            .overlay(
-                Button(action: {
-                    self.showAddTransaction = true
-                    //Aggiunta della transazione
-                }){
-                    Image(systemName: "plus")
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .clipShape(Circle())
-                        .shadow(radius: 4)
-                }
-                , alignment: .trailing)
+        Button(action: {
+            self.showAddTransaction = true
+            //Aggiunta della transazione
+        }){
+            Image(systemName: "plus")
+                .buttonStyle(.bordered)
+                .tint(.pink)
+                .font(.system(size: 24))
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.accentColor)
+                .clipShape(Circle())
+                .shadow(radius: 4)
         }
+     
         .sheet(isPresented: $showAddTransaction) {
             // Aggiungi la vista per aggiungere una transazione
         }

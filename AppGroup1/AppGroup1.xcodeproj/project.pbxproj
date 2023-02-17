@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D020572299FC77000FA447F /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D02056F299FC77000FA447F /* Person.swift */; };
+		6D020573299FC77000FA447F /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D020570299FC77000FA447F /* Home.swift */; };
+		6D020574299FC77000FA447F /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D020571299FC77000FA447F /* Expense.swift */; };
 		6D291C18299CD7ED00220F66 /* AppGroup1App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D291C17299CD7ED00220F66 /* AppGroup1App.swift */; };
 		6D291C1A299CD7ED00220F66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D291C19299CD7ED00220F66 /* ContentView.swift */; };
 		6D291C1C299CD7EE00220F66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D291C1B299CD7EE00220F66 /* Assets.xcassets */; };
@@ -36,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D02056F299FC77000FA447F /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		6D020570299FC77000FA447F /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		6D020571299FC77000FA447F /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		6D291C14299CD7ED00220F66 /* AppGroup1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppGroup1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D291C17299CD7ED00220F66 /* AppGroup1App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup1App.swift; sourceTree = "<group>"; };
 		6D291C19299CD7ED00220F66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +81,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D02056E299FC77000FA447F /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				6D02056F299FC77000FA447F /* Person.swift */,
+				6D020570299FC77000FA447F /* Home.swift */,
+				6D020571299FC77000FA447F /* Expense.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		6D291C0B299CD7ED00220F66 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +114,7 @@
 		6D291C16299CD7ED00220F66 /* AppGroup1 */ = {
 			isa = PBXGroup;
 			children = (
+				6D02056E299FC77000FA447F /* Entity */,
 				6D8D00A1299FA1F5001E1AFF /* SearchView.swift */,
 				6D291C19299CD7ED00220F66 /* ContentView.swift */,
 				6D71939E299F8766006A3D73 /* TabBarView.swift */,
@@ -263,9 +280,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D020574299FC77000FA447F /* Expense.swift in Sources */,
+				6D020572299FC77000FA447F /* Person.swift in Sources */,
 				6D8D00A2299FA1F5001E1AFF /* SearchView.swift in Sources */,
 				6D291C1A299CD7ED00220F66 /* ContentView.swift in Sources */,
 				6D71939F299F8766006A3D73 /* TabBarView.swift in Sources */,
+				6D020573299FC77000FA447F /* Home.swift in Sources */,
 				6D291C18299CD7ED00220F66 /* AppGroup1App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,7 +446,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AppGroup1/Preview Content\"";
-				DEVELOPMENT_TEAM = 687P8757QD;
+				DEVELOPMENT_TEAM = 37F3L33GF6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -439,7 +459,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = giammarco.app;
+				PRODUCT_BUNDLE_IDENTIFIER = lung.arell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -457,7 +477,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AppGroup1/Preview Content\"";
-				DEVELOPMENT_TEAM = 687P8757QD;
+				DEVELOPMENT_TEAM = 37F3L33GF6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -470,7 +490,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = giammarco.app;
+				PRODUCT_BUNDLE_IDENTIFIER = lung.arell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

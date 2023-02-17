@@ -12,14 +12,14 @@ struct TabBarView: View {
         TabView{
             ContentView()
                 .tabItem {
-                    Image(systemName: "note.text")
-                    Text("Note")
+                    Image(systemName: "dollarsign.circle")
+                    Text("Spese")
                 }
             
             Text("Spese")
                 .tabItem {
-                    Image(systemName: "dollarsign.circle")
-                    Text("Spese")
+                    Image(systemName: "note.text")
+                    Text("Note")
                 }
             Text("Profilo")
                 
@@ -33,6 +33,7 @@ struct TabBarView: View {
         }
         
     }
+        
 }
 
 struct TabBarView_Previews: PreviewProvider {
