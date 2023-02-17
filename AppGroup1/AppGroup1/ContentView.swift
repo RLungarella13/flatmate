@@ -8,59 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    var buttonSize = 30
     @State private var showAddTransaction = false
     var body: some View {
-        NavigationView {
+        VStack (){
             
-            VStack {
-                Text("230 €")
-                    .font(.system(size: 30))
-                    .bold()
-                    .foregroundColor(Color.primary)
-                Text("Balance")
-                    .foregroundColor(.gray)
-                    .bold()
-                    .font(.system(size: 18))
-                ClickableHStack()
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .shadow(radius: 4)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 16)
-                
-                TransactionSection()
-                
-                Spacer()
-                
-                TabView {
-                    
-                    Text("Note")
-                        .tabItem {
-                            Image(systemName: "note.text")
-                            Text("Note")
-                        }
-                    Text("Spese")
-                        .tabItem {
-                            Image(systemName: "dollarsign.circle")
-                            Text("Spese")
-                        }
-                    Text("Profilo")
-                        .tabItem {
-                            Image(systemName: "person.circle")
-                            Text("Profilo")
-                            
-                        }}
-                
-
-               
-                
-            }
+            titleHomeView()
+            Spacer()
+            ClickableHStack()
+                .background(Color.white)
+                .cornerRadius(10)
+                .shadow(radius: 4)
+                .padding()
+            
+            TransactionSection()
+            
+            Spacer()
             
             .padding(15.0)
-            .navigationBarTitle("Cashflow")
-            .navigationBarTitleDisplayMode(.automatic)
             .font(.system(size: 30, weight: .bold))
             .foregroundColor(.black)
             .navigationBarItems(trailing:
@@ -102,8 +67,15 @@ struct ContentView: View {
     }
 }
 
+struct CustomCenter: AlignmentID {
+  static func defaultValue(in context: ViewDimensions) -> CGFloat {
+    context[HorizontalAlignment.center]
+  }
+}
 
-
+extension HorizontalAlignment {
+  static let customCenter: HorizontalAlignment = .init(CustomCenter.self)
+}
 
 struct TransactionSection: View {
     var body: some View {
@@ -124,6 +96,7 @@ struct TransactionSection: View {
         }
     }
 }
+
 struct ClickableHStack: View {
     var body: some View {
         Button(action: {
@@ -132,13 +105,66 @@ struct ClickableHStack: View {
             
             HStack {
                 Spacer()
-                Image(systemName: "person")
-                Image(systemName: "person")
-                Image(systemName: "person")
-                Image(systemName: "person")
+                ForEach(0..<4){ index in
+                    Image(systemName: "person")
+                        .font(.system(size:30))
+                }
+                
                 Spacer()
                 
             }
+            .padding()
+        }
+    }
+}
+
+struct CustomNavBar<Left, Center, Right>: View where Left: View, Center: View, Right: View {
+    let left: () -> Left
+    let center: () -> Center
+    let right: () -> Right
+    init(@ViewBuilder left: @escaping () -> Left, @ViewBuilder center: @escaping () -> Center, @ViewBuilder right: @escaping () -> Right) {
+        self.left = left
+        self.center = center
+        self.right = right
+    }
+    var body: some View {
+        ZStack {
+            HStack {
+                left()
+                Spacer()
+            }
+            center()
+            HStack {
+                Spacer()
+                right()
+            }
+        }
+    }
+}
+
+struct titleHomeView: View{
+    let buttonSize: CGFloat = 30
+    var body: some View {
+        VStack {
+            CustomNavBar(left: {}, center: {
+                VStack{
+                    Text("230$")
+                        .font(.title)
+                        .bold()
+                    Text("Balance")
+                        .font(.headline)
+                        .foregroundColor(.gray)
+                }
+    
+            }, right: {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .resizable()
+                        .frame(width: 30, height: 30, alignment: .center)
+                        .padding(.trailing)
+                }
+                .foregroundColor(.accentColor)
+            })
             .padding()
         }
     }
