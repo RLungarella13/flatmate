@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     var buttonSize = 30
-    @State private var showAddTransaction = false
     var body: some View {
         VStack (){
             //Titolo centrale con tasto di ricerca
@@ -21,37 +20,20 @@ struct ContentView: View {
                 .padding()
             TransactionSection()//Lista delle transazioni
             Spacer()
-            HStack{
-                Spacer()
-                Button(action: {
-                    self.showAddTransaction = true
-                    //Aggiunta della transazione
-                }){
-                    Image(systemName: "plus")
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .clipShape(Circle())
-                        .shadow(radius: 4)
-                }
-                .sheet(isPresented: $showAddTransaction) {
-                    // Aggiungi la vista per aggiungere una transazione
-                }
-            }.padding(30)
-            
+            floatingAddButton()
         }
     }
+    
 }
 
 struct CustomCenter: AlignmentID {
-  static func defaultValue(in context: ViewDimensions) -> CGFloat {
-    context[HorizontalAlignment.center]
-  }
+    static func defaultValue(in context: ViewDimensions) -> CGFloat {
+        context[HorizontalAlignment.center]
+    }
 }
 
 extension HorizontalAlignment {
-  static let customCenter: HorizontalAlignment = .init(CustomCenter.self)
+    static let customCenter: HorizontalAlignment = .init(CustomCenter.self)
 }
 
 struct TransactionSection: View {
@@ -68,10 +50,12 @@ struct TransactionSection: View {
             }
             .padding()
             List{
-                ForEach(0..<4){index in
-                    Text("Daje")
+                ForEach(0..<10){index in
+                    TransactionCell()
                 }
+                
             }
+            .listStyle(PlainListStyle())
             
             // Inserire qui la lista delle transazioni
         }
@@ -137,7 +121,7 @@ struct titleHomeView: View{
                         .font(.headline)
                         .foregroundColor(.gray)
                 }
-    
+                
             }, right: {
                 HStack {
                     Button(action: {showSearchView.toggle()}){
@@ -163,3 +147,58 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+struct TransactionCell: View{
+    var body: some View{
+        HStack{
+            Image(systemName: "square")
+                .font(.system(size: 50))
+            Spacer()
+            VStack(alignment: .leading){
+                HStack{
+                    Text("Title of Spesa")
+                        .font(.system(size: 20)).bold()
+                    Spacer()
+                    Text("Total:")
+                    
+                }
+                HStack{
+                    Text("You paid : 3$")
+                        .foregroundColor(.gray)
+                    Spacer()
+                    Text("34$")
+                }
+                
+            }
+            Spacer()
+            
+        }
+        .padding(.vertical)
+    }
+    
+}
+
+struct floatingAddButton: View{
+    @State private var showAddTransaction = false
+    var body: some View{
+        HStack{
+            Spacer()
+            .overlay(
+                Button(action: {
+                    self.showAddTransaction = true
+                    //Aggiunta della transazione
+                }){
+                    Image(systemName: "plus")
+                        .font(.system(size: 24))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .clipShape(Circle())
+                        .shadow(radius: 4)
+                }
+                , alignment: .trailing)
+        }
+        .sheet(isPresented: $showAddTransaction) {
+            // Aggiungi la vista per aggiungere una transazione
+        }
+    }
+}
