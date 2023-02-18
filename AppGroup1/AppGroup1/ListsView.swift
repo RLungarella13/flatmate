@@ -31,7 +31,7 @@ struct ListsView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
-                Color.white
+                Color("BackGround").ignoresSafeArea()
                 VStack {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
