@@ -27,7 +27,9 @@ struct ContentView: View {
                 Spacer()
                 HStack{
                     Spacer()
-                    floatingAddButton()
+                    ButtonView{
+                        EditView()
+                    }
                 }
             }
             .padding(40)
@@ -101,7 +103,7 @@ struct titleHomeView: View{
         VStack {
             CustomNavBar(left: {}, center: {
                 VStack{
-                    Text("---")
+                    Text("00.00")
                         .font(.title)
                         .bold()
                     +
@@ -172,32 +174,6 @@ struct TransactionCell: View{
         
     }
 }
-
-
-struct floatingAddButton: View{
-    @State private var showAddTransaction = false
-    var body: some View{
-        Button(action: {
-            self.showAddTransaction = true
-            //Aggiunta della transazione
-        }){
-            Image(systemName: "plus")
-                .buttonStyle(.bordered)
-                .tint(.pink)
-                .font(.system(size: 24))
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.accentColor)
-                .clipShape(Circle())
-                .shadow(radius: 4)
-        }
-        
-        .sheet(isPresented: $showAddTransaction) {
-            // Aggiungi la vista per aggiungere una transazione
-        }
-    }
-}
-
 
 struct CustomColor {
     static let myColor = Color("BackGround")

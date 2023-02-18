@@ -63,17 +63,17 @@ struct ListsView: View {
                         }
                     }
                 }
-                Button(action: {
-                    selectedNote = nil
-                    isAddingNote.toggle()
-                }) {
-                    Image(systemName: "plus")
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .clipShape(Circle())
+                VStack{
+                    Spacer()
+                    HStack{
+                        Spacer()
+                        ButtonView{
+                            CreateNoteView(notes: $notes, noteTitle: "", noteContent: "", selectedNote: $selectedNote)
+                        }
+                    }
                 }
-                .padding(.trailing)
+                .padding(40)
+               
             }
             .navigationBarTitle("Notes")
             .navigationBarItems(
@@ -97,9 +97,6 @@ struct ListsView: View {
                         }
                     }
             )
-            .sheet(isPresented: $isAddingNote) {
-                CreateNoteView(notes: $notes, isPresented: $isAddingNote, noteTitle: "", noteContent: "", selectedNote: $selectedNote)
-            }
         }
     }
 }
@@ -110,10 +107,10 @@ struct ListsView: View {
 
 struct CreateNoteView: View {
     @Binding var notes: [Note]
-    @Binding var isPresented: Bool
     @State var noteTitle: String
     @State var noteContent: String
     @Binding var selectedNote: Note?
+    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         NavigationView {
@@ -135,7 +132,7 @@ struct CreateNoteView: View {
             .navigationBarTitle(selectedNote != nil ? "Edit Note" : "New Note", displayMode: .inline)
             .navigationBarItems(
                 leading: Button("Cancel") {
-                    isPresented = false
+                    presentationMode.wrappedValue.dismiss()
                 },
                 trailing: Button("Save") {
                     if selectedNote != nil {
@@ -145,7 +142,7 @@ struct CreateNoteView: View {
                     } else {
                         notes.append(Note(title: noteTitle, content: noteContent))
                     }
-                    isPresented = false
+                    presentationMode.wrappedValue.dismiss()
                 }
             )
         }
