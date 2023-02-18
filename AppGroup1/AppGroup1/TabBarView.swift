@@ -16,11 +16,12 @@ struct TabBarView: View {
                     Text("Spese")
                 }
             
-            Text("Spese")
+            ListsView()
                 .tabItem {
                     Image(systemName: "note.text")
                     Text("Note")
                 }
+            
             ProfileView()
                 .tabItem {
                     Image(systemName: "person.circle")
