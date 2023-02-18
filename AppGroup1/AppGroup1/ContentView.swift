@@ -11,7 +11,6 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            
             Color("BackGround").ignoresSafeArea()
             VStack (){
                 //Titolo centrale con tasto di ricerca
@@ -37,16 +36,6 @@ struct ContentView: View {
     
 }
 
-struct CustomCenter: AlignmentID {
-    static func defaultValue(in context: ViewDimensions) -> CGFloat {
-        context[HorizontalAlignment.center]
-    }
-}
-
-extension HorizontalAlignment {
-    static let customCenter: HorizontalAlignment = .init(CustomCenter.self)
-}
-
 struct TransactionSection: View {
     @State var expanded = true
     var body: some View {
@@ -56,9 +45,11 @@ struct TransactionSection: View {
                 DisclosureGroup(isExpanded: $expanded, content: {
                     
                     ForEach(0..<10) { index in
-                        NavigationLink(destination: EditView()){
+                        Button(action: {
+                            
+                        })
+                        {
                             TransactionCell()
-                            // MARK: CAMBIARE NON VOGLIO USARE NAVIGATION VIEW
                         }
                     }
                     
@@ -96,41 +87,28 @@ struct ClickableHStack: View {
     }
 }
 
-struct CustomNavBar<Left, Center, Right>: View where Left: View, Center: View, Right: View {
-    let left: () -> Left
-    let center: () -> Center
-    let right: () -> Right
-    init(@ViewBuilder left: @escaping () -> Left, @ViewBuilder center: @escaping () -> Center, @ViewBuilder right: @escaping () -> Right) {
-        self.left = left
-        self.center = center
-        self.right = right
-    }
-    var body: some View {
-        ZStack {
-            HStack {
-                left()
-                Spacer()
-            }
-            center()
-            HStack {
-                Spacer()
-                right()
-            }
-        }
-    }
-}
-
 struct titleHomeView: View{
+    
+    let balanceTitle = "Balance"
+    var monetarySign = "€"
     let buttonSize: CGFloat = 30
     @State private var showSearchView = false
+    
+    
+    
+    
     var body: some View {
         VStack {
             CustomNavBar(left: {}, center: {
                 VStack{
-                    Text("230$")
+                    Text("---")
                         .font(.title)
                         .bold()
-                    Text("Balance")
+                    +
+                    Text(monetarySign)
+                        .font(.title2)
+                        .bold()
+                    Text(balanceTitle)
                         .font(.headline)
                         .foregroundColor(.gray)
                 }
@@ -224,4 +202,38 @@ struct floatingAddButton: View{
 struct CustomColor {
     static let myColor = Color("BackGround")
     // Add more here...
+}
+
+struct CustomCenter: AlignmentID {
+    static func defaultValue(in context: ViewDimensions) -> CGFloat {
+        context[HorizontalAlignment.center]
+    }
+}
+
+extension HorizontalAlignment {
+    static let customCenter: HorizontalAlignment = .init(CustomCenter.self)
+}
+
+struct CustomNavBar<Left, Center, Right>: View where Left: View, Center: View, Right: View {
+    let left: () -> Left
+    let center: () -> Center
+    let right: () -> Right
+    init(@ViewBuilder left: @escaping () -> Left, @ViewBuilder center: @escaping () -> Center, @ViewBuilder right: @escaping () -> Right) {
+        self.left = left
+        self.center = center
+        self.right = right
+    }
+    var body: some View {
+        ZStack {
+            HStack {
+                left()
+                Spacer()
+            }
+            center()
+            HStack {
+                Spacer()
+                right()
+            }
+        }
+    }
 }
