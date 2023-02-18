@@ -11,13 +11,14 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
+            
+            Color("BackGround").ignoresSafeArea()
             VStack (){
                 //Titolo centrale con tasto di ricerca
                 titleHomeView()
                 ClickableHStack()//Rettangolo con la visualizzazione dei membri
-                    .background(Color.white)
+                    .background(Color("ForeGround"))
                     .cornerRadius(10)
-                    .shadow(radius: 4)
                     .padding()
                 TransactionSection()//Lista delle transazioni
                 Spacer()
@@ -47,29 +48,31 @@ extension HorizontalAlignment {
 }
 
 struct TransactionSection: View {
+    @State var expanded = true
     var body: some View {
-        VStack {
-            HStack {
-                Text("Transactions")
-                    .font(.system(size: 24))
-                    .bold()
-                Spacer()
-                Text("Show All")
-                    .font(.system(size: 18))
-                    .foregroundColor(.accentColor)
-                
+        
+        ScrollView{
+            VStack{
+                DisclosureGroup(isExpanded: $expanded, content: {
+                    
+                    ForEach(0..<10) { index in
+                        NavigationLink(destination: EditView()){
+                            TransactionCell()
+                            // MARK: CAMBIARE NON VOGLIO USARE NAVIGATION VIEW
+                        }
+                    }
+                    
+                }, label: {
+                    Text("Transactions")
+                        .font(.system(size: 24))
+                        .bold()
+                        .foregroundColor(.primary)
+                })
+                .padding()
             }
-            .padding()
-            List{
-                ForEach(0..<10){index in
-                    TransactionCell()
-                }
-                
-            }
-            .listStyle(PlainListStyle())
-            
-            // Inserire qui la lista delle transazioni
         }
+        
+        
     }
 }
 
@@ -78,11 +81,10 @@ struct ClickableHStack: View {
         Button(action: {
             // Azione da eseguire quando l'HStack viene toccato
         }) {
-            
             HStack {
                 Spacer()
                 ForEach(0..<4){ index in
-                    Image(systemName: "person")
+                    Image(systemName: "person.crop.circle.fill")
                         .font(.system(size:30))
                 }
                 
@@ -161,8 +163,11 @@ struct ContentView_Previews: PreviewProvider {
 struct TransactionCell: View{
     var body: some View{
         HStack{
-            Image(systemName: "square")
+            Spacer()
+            Image(systemName: "note.text")
+                .foregroundColor(.accentColor)
                 .font(.system(size: 50))
+            
             Spacer()
             VStack(alignment: .leading){
                 HStack{
@@ -170,23 +175,26 @@ struct TransactionCell: View{
                         .font(.system(size: 20)).bold()
                     Spacer()
                     Text("Total:")
-                    
                 }
+                .foregroundColor(.primary)
                 HStack{
                     Text("You paid : 3$")
                         .foregroundColor(.gray)
                     Spacer()
                     Text("34$")
+                        .foregroundColor(.primary)
                 }
                 
-            }
+            }.padding()
             Spacer()
             
         }
-        .padding(.vertical)
+        .background(Color("ForeGround"))
+        .cornerRadius(10)
+        
     }
-    
 }
+
 
 struct floatingAddButton: View{
     @State private var showAddTransaction = false
@@ -205,9 +213,15 @@ struct floatingAddButton: View{
                 .clipShape(Circle())
                 .shadow(radius: 4)
         }
-     
+        
         .sheet(isPresented: $showAddTransaction) {
             // Aggiungi la vista per aggiungere una transazione
         }
     }
+}
+
+
+struct CustomColor {
+    static let myColor = Color("BackGround")
+    // Add more here...
 }

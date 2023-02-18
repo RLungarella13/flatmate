@@ -21,11 +21,10 @@ struct TabBarView: View {
                     Image(systemName: "note.text")
                     Text("Note")
                 }
-            Text("Profilo")
-                
+            ProfileView()
                 .tabItem {
                     Image(systemName: "person.circle")
-                    Text("Profilo")
+                    Text("Account")
                 
                     
             }

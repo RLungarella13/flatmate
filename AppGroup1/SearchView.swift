@@ -3,6 +3,8 @@ import SwiftUI
 struct SearchView: View {
     private var listOfCountry = ["ciao","prova","mac","apple"]
     @State var searchText = ""
+    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
+
     
     var body: some View {
         NavigationView {
@@ -16,7 +18,14 @@ struct SearchView: View {
                 }
             }
             .searchable(text: $searchText)
-            .navigationTitle("Title")
+            .navigationTitle("Search Transaction")
+            .navigationBarItems(leading: Button(action:{
+                
+                presentationMode.wrappedValue.dismiss()
+                
+            }){
+                Text("Dismiss")
+            })
         }
     }
     
