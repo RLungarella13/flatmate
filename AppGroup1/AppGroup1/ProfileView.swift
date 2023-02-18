@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct ProfileView: View {
-    
-    let profileViewTitle = "Account"
-    let settingsTitle = "Settings"
     var body: some View {
         NavigationView{
             ZStack{
                 Color("BackGround").ignoresSafeArea()
                 VStack(alignment: .leading, spacing: 20){
-                    Text(settingsTitle)
+                    Text("Settings")
                         .font(.system(size: 16))
                         .bold()
                         .foregroundColor(.gray)
@@ -48,13 +45,10 @@ struct ProfileView: View {
                         .bold()
                     Divider()
                     balanceOverview()
-                    Divider()
                     Spacer()
-                    
-                    
                 }
                 .padding()
-                .navigationBarTitle(profileViewTitle)
+                .navigationBarTitle("Account")
                 .navigationBarTitleDisplayMode(.automatic)
             }
         }
@@ -62,7 +56,6 @@ struct ProfileView: View {
         
     }
 }
-
 struct balanceOverview: View{
     var body: some View{
         List{
@@ -81,13 +74,6 @@ struct balanceOverview: View{
         
     }
 }
-
-//struct settings: View{
-//    var body: some View{
-//
-//    }
-//}
-
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
