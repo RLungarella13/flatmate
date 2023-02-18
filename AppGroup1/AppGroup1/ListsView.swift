@@ -62,21 +62,29 @@ struct ListsView: View {
                             }
                         }
                     }
+                    VStack{
+                        Spacer()
+                        HStack{
+                            Spacer()
+                            Button(action: {
+                                selectedNote = nil
+                                isAddingNote.toggle()
+                            }) {
+                                Image(systemName: "plus")
+                                    .buttonStyle(.bordered)
+                                    .tint(.pink)
+                                    .font(.system(size: 24))
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.accentColor)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 4)
+                            }
+                        }
+                        .padding(40)}
+                    
                 }
-                Button(action: {
-                    selectedNote = nil
-                    isAddingNote.toggle()
-                }) {
-                    Image(systemName: "plus")
-                        .buttonStyle(.bordered)
-                        .tint(.pink)
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.accentColor)
-                        .clipShape(Circle())
-                        .shadow(radius: 4)
-                }
+                
                 .padding(.trailing)
             }
             .navigationBarTitle("Notes")
