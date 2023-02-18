@@ -34,7 +34,7 @@ struct ListsView: View {
                 Color("BackGround").ignoresSafeArea()
                 VStack {
                     ScrollView {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
                             ForEach(notes) { note in
                                 Button(action: {
                                     if isEditing {
@@ -56,7 +56,7 @@ struct ListsView: View {
                                     }
                                     .padding()
                                     .frame(width: 150, height: 150)
-                                    .background(selectedNotes.contains(note) ? Color.blue : Color.blue.opacity(0.2))
+                                    .background(selectedNotes.contains(note) ? Color.orange : Color.orange.opacity(0.2))
                                     .cornerRadius(10)
                                 }
                             }
@@ -68,10 +68,14 @@ struct ListsView: View {
                     isAddingNote.toggle()
                 }) {
                     Image(systemName: "plus")
-                        .padding()
-                        .background(Color.blue)
+                        .buttonStyle(.bordered)
+                        .tint(.pink)
+                        .font(.system(size: 24))
                         .foregroundColor(.white)
+                        .padding()
+                        .background(Color.accentColor)
                         .clipShape(Circle())
+                        .shadow(radius: 4)
                 }
                 .padding(.trailing)
             }
