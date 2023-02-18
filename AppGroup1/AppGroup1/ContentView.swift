@@ -3,24 +3,27 @@
 //  AppGroup1
 //
 //  Created by Raffaele Lungarella on 15/02/23.
-//
+//m
 
 import SwiftUI
 
 struct ContentView: View {
-    
+    @FetchRequest(sortDescriptors: []) var expenses: FetchedResults<Expense>
     var body: some View {
         ZStack{
             Color("BackGround").ignoresSafeArea()
-            VStack (){
-                //Titolo centrale con tasto di ricerca
-                titleHomeView()
-                ClickableHStack()//Rettangolo con la visualizzazione dei membri
-                    .background(Color("ForeGround"))
-                    .cornerRadius(10)
-                    .padding()
-                TransactionSection()//Lista delle transazioni
-                Spacer()
+            ScrollView{
+                VStack(spacing: -10){
+                    //Titolo centrale con tasto di ricerca
+                    titleHomeView()
+                    ClickableHStack()//Rettangolo con la visualizzazione dei membri
+                        .background(Color("ForeGround"))
+                        .cornerRadius(10)
+                        .padding()
+                    TransactionSection()//Lista delle transazioni
+                    Spacer()
+                    
+                }
                 
             }
             VStack{
@@ -40,17 +43,11 @@ struct TransactionSection: View {
     @State var expanded = true
     var body: some View {
         
-        ScrollView{
+        
             VStack{
                 DisclosureGroup(isExpanded: $expanded, content: {
-                    
-                    ForEach(0..<10) { index in
-                        Button(action: {
-                            
-                        })
-                        {
-                            TransactionCell()
-                        }
+                    ForEach(expenses.count){expense in
+                        TransactionCell()
                     }
                     
                 }, label: {
@@ -59,9 +56,9 @@ struct TransactionSection: View {
                         .bold()
                         .foregroundColor(.primary)
                 })
-                .padding()
+                .padding(20)
             }
-        }
+        
         
         
     }
@@ -82,6 +79,7 @@ struct ClickableHStack: View {
                 Spacer()
                 
             }
+            .frame(height: 50)
             .padding()
         }
     }
@@ -101,13 +99,10 @@ struct titleHomeView: View{
         VStack {
             CustomNavBar(left: {}, center: {
                 VStack{
-                    Text("---")
+                    Text("00,00€")
                         .font(.title)
                         .bold()
-                    +
-                    Text(monetarySign)
-                        .font(.title2)
-                        .bold()
+
                     Text(balanceTitle)
                         .font(.headline)
                         .foregroundColor(.gray)
@@ -139,37 +134,39 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct TransactionCell: View{
+    @ObservedObject var expense: Expense
     var body: some View{
-        HStack{
-            Spacer()
-            Image(systemName: "note.text")
-                .foregroundColor(.accentColor)
-                .font(.system(size: 50))
-            
-            Spacer()
-            VStack(alignment: .leading){
-                HStack{
-                    Text("Title of Spesa")
-                        .font(.system(size: 20)).bold()
-                    Spacer()
-                    Text("Total:")
-                }
-                .foregroundColor(.primary)
-                HStack{
-                    Text("You paid : 3$")
-                        .foregroundColor(.gray)
-                    Spacer()
-                    Text("34$")
-                        .foregroundColor(.primary)
-                }
+        Button(action: {}){
+            HStack{
+                Spacer()
+                Image(systemName: "cart")
+                    .foregroundColor(.accentColor)
+                    .font(.system(size: 30))
                 
-            }.padding()
-            Spacer()
-            
+                Spacer()
+                VStack(alignment: .leading){
+                    HStack{
+                        Text("Title of Spesa")
+                            .font(.system(size: 20)).bold()
+                        Spacer()
+                        Text("Total:")
+                    }
+                    .foregroundColor(.primary)
+                    HStack{
+                        Text("You paid : 3$")
+                            .foregroundColor(.gray)
+                        Spacer()
+                        Text("34$")
+                            .foregroundColor(.primary)
+                    }
+                    
+                }.padding()
+                Spacer()
+                
+            }
+            .background(Color("ForeGround"))
+            .cornerRadius(10)
         }
-        .background(Color("ForeGround"))
-        .cornerRadius(10)
-        
     }
 }
 
@@ -196,12 +193,6 @@ struct floatingAddButton: View{
             // Aggiungi la vista per aggiungere una transazione
         }
     }
-}
-
-
-struct CustomColor {
-    static let myColor = Color("BackGround")
-    // Add more here...
 }
 
 struct CustomCenter: AlignmentID {

@@ -12,66 +12,131 @@ struct ProfileView: View {
         NavigationView{
             ZStack{
                 Color("BackGround").ignoresSafeArea()
-                VStack(alignment: .leading, spacing: 20){
-                    Text("Settings")
-                        .font(.system(size: 16))
-                        .bold()
-                        .foregroundColor(.gray)
-                    HStack{
-                        ZStack(alignment: .bottomTrailing){
-                            Image(systemName: "person.crop.circle.fill")
-                                .font(.system(size: 60))
-                            Button(action: {}){
-                                Image(systemName: "camera.fill")
+                ScrollView{
+                    VStack(alignment: .leading, spacing: 30){
+                        Text("Settings")
+                            .font(.system(size: 16))
+                            .bold()
+                            .foregroundColor(.gray)
+                        accountSettings()
+                        Text("Preferences")
+                            .font(.system(size: 16))
+                            .bold()
+                            .foregroundColor(.gray)
+                        preferencesSettings()
+                        Text("Feedback")
+                            .font(.system(size: 16))
+                            .bold()
+                            .foregroundColor(.gray)
+                        feedbackSettings()
+                        Divider()
+                        Spacer()
+                        HStack{
+                            Spacer()
+                            Button(action:{
                                 
-                                
+                            }){
+                                Text("Log out")
                             }
-                        }
-                        
-                        VStack(alignment: .leading, spacing: 5){
-                            Text("Raffaele Lungarella")
-                                .font(.system(size: 22))
-                                .bold()
-                            
-                            Text("goxgwadu@telegmail.com")
-                                .font(.system(size: 14))
-                            
+                            Spacer()
                         }
                         Spacer()
-                        
                     }
-                    Text("Home Overview")
-                        .font(.title3)
-                        .bold()
-                    Divider()
-                    balanceOverview()
-                    Spacer()
+                    .padding()
                 }
-                .padding()
                 .navigationBarTitle("Account")
-                .navigationBarTitleDisplayMode(.automatic)
             }
         }
-       
         
     }
 }
-struct balanceOverview: View{
+
+struct accountSettings: View{
     var body: some View{
-        List{
-            ForEach(0..<3){ index in
-                HStack{
-                    Image(systemName: "person")
-                        .font(.system(size: 30))
-                    
-                    VStack{
-                        Text("Giammarco Fontana owes 4,33$ in total")
+        Button(action:{
+            
+        }){
+            HStack{
+                ZStack(alignment: .bottomTrailing){
+                    Image(systemName: "person.crop.circle.fill")
+                        .foregroundColor(.primary)
+                        .font(.system(size: 60))
+                    Button(action: {}){
+                        Image(systemName: "camera.fill")
+                        
                         
                     }
                 }
+                
+                VStack(alignment: .leading, spacing: 5){
+                    Text("Raffaele Lungarella")
+                        .font(.system(size: 22))
+                        .bold()
+                        .foregroundColor(.primary)
+                    
+                    Text("goxgwadu@telegmail.com")
+                        .font(.system(size: 14))
+                    
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+            }
+        }
+    }
+}
+
+struct preferencesSettings: View{
+    var body: some View{
+        Button(action: {
+            
+        }){
+            HStack{
+                Text("Notifications")
+                    .foregroundColor(.primary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                
+            }
+        }
+        Button(action: {
+            
+        }){
+            HStack{
+                Text("Passcode")
+                    .foregroundColor(.primary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                
+            }
+        }
+    }
+}
+
+struct feedbackSettings: View{
+    var body: some View{
+        Button(action: {
+            
+        }){
+            HStack{
+                Text("Rate us")
+                    .foregroundColor(.primary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                
             }
         }
         
+        Button(action: {
+            
+        }){
+            HStack{
+                Text("Contact us")
+                    .foregroundColor(.primary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                
+            }
+        }
     }
 }
 struct ProfileView_Previews: PreviewProvider {
