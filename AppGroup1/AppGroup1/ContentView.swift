@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @FetchRequest(sortDescriptors: []) var expenses: FetchedResults<Expense>
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: true)]) var allExpenses : FetchedResults<Expense>
+    
+    @State var expanded = true
+    @State private var showingDetails = false
+    
+    
     var body: some View {
         ZStack{
             Color("BackGround").ignoresSafeArea()
@@ -20,7 +26,33 @@ struct ContentView: View {
                         .background(Color("ForeGround"))
                         .cornerRadius(10)
                         .padding()
-                    TransactionSection()//Lista delle transazioni
+                    VStack{
+                        DisclosureGroup(isExpanded: $expanded, content: {
+                            NavigationView {
+                                
+                                ForEach(allExpenses) {expense  in
+                                    
+                                    
+                                    TransactionCell(expense: expense)
+                                    
+                                }
+                                .onDelete { indexSet in
+                                    removeExpense(at: indexSet)
+                                }
+                                Spacer()
+                                
+                                .navigationBarItems( trailing: Button(action: {self.showingDetails.toggle()}) {
+                                    
+                                })
+                            }
+                        }, label: {
+                            Text("Transactions")
+                                .font(.system(size: 24))
+                                .bold()
+                                .foregroundColor(.primary)
+                        })
+                        .padding(20)
+                    }
                     Spacer()
                     
                 }
@@ -37,32 +69,26 @@ struct ContentView: View {
         }
     }
     
-}
-
-struct TransactionSection: View {
-    @State var expanded = true
-    var body: some View {
+    
+    func removeExpense( at offsets: IndexSet) {
+        
+        for index in offsets {
+            
+            viewContext.delete(allExpenses[index])
+        }
         
         
-            VStack{
-                DisclosureGroup(isExpanded: $expanded, content: {
-                    ForEach(expenses.count){expense in
-                        TransactionCell()
-                    }
-                    
-                }, label: {
-                    Text("Transactions")
-                        .font(.system(size: 24))
-                        .bold()
-                        .foregroundColor(.primary)
-                })
-                .padding(20)
-            }
-        
-        
+        do {
+            try viewContext.save()
+        }
+        catch {
+            
+            print(error.localizedDescription)
+        }
         
     }
 }
+
 
 struct ClickableHStack: View {
     var body: some View {
@@ -93,8 +119,6 @@ struct titleHomeView: View{
     @State private var showSearchView = false
     
     
-    
-    
     var body: some View {
         VStack {
             CustomNavBar(left: {}, center: {
@@ -102,7 +126,7 @@ struct titleHomeView: View{
                     Text("00,00€")
                         .font(.title)
                         .bold()
-
+                    
                     Text(balanceTitle)
                         .font(.headline)
                         .foregroundColor(.gray)
@@ -135,8 +159,9 @@ struct ContentView_Previews: PreviewProvider {
 
 struct TransactionCell: View{
     @ObservedObject var expense: Expense
+    
     var body: some View{
-        Button(action: {}){
+        NavigationLink(destination: EditView(expense: expense) ){
             HStack{
                 Spacer()
                 Image(systemName: "cart")
@@ -146,23 +171,22 @@ struct TransactionCell: View{
                 Spacer()
                 VStack(alignment: .leading){
                     HStack{
-                        Text("Title of Spesa")
+                        Text(expense.title ?? "")
                             .font(.system(size: 20)).bold()
                         Spacer()
                         Text("Total:")
                     }
                     .foregroundColor(.primary)
                     HStack{
-                        Text("You paid : 3$")
+                        Text("You paid :")
                             .foregroundColor(.gray)
                         Spacer()
-                        Text("34$")
+                        
+                        Text(String(format: "%.2f", expense.total)+"$")
                             .foregroundColor(.primary)
                     }
-                    
                 }.padding()
                 Spacer()
-                
             }
             .background(Color("ForeGround"))
             .cornerRadius(10)
@@ -190,7 +214,7 @@ struct floatingAddButton: View{
         }
         
         .sheet(isPresented: $showAddTransaction) {
-            // Aggiungi la vista per aggiungere una transazione
+            AddExpenseView()
         }
     }
 }
