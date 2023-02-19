@@ -7,12 +7,15 @@
 
 import SwiftUI
 
+
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: true)]) var allExpenses : FetchedResults<Expense>
+    @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
     
     @State var expanded = true
     @State private var showingDetails = false
+    
     
     
     var body: some View {
@@ -24,9 +27,9 @@ struct ContentView: View {
                         //Titolo centrale con tasto di ricerca
                         titleHomeView()
                         //ClickableHStack()//Rettangolo con la visualizzazione dei membri
-                            .background(Color("ForeGround"))
-                            .cornerRadius(10)
-                            .padding()
+//                            .background(Color("ForeGround"))
+//                            .cornerRadius(10)
+//                            .padding()
                         VStack{
                             DisclosureGroup(isExpanded: $expanded, content: {
                                 ForEach(allExpenses) {expense  in
@@ -47,15 +50,16 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-                VStack{
-                    Spacer()
-                    HStack{
-                        Spacer()
-                        floatingAddButton()
-                    }
-                }
-                .padding(40)
+                
             }
+            VStack{
+                Spacer()
+                HStack{
+                    Spacer()
+                    floatingAddButton()
+                }
+            }
+            .padding(40)
         }
     }
     
@@ -168,7 +172,7 @@ struct TransactionCell: View{
                     }
                     .foregroundColor(.primary)
                     HStack{
-                        Text("You paid :")
+                        Text(expense.date!.formatted(.dateTime.day().month().year()))
                             .foregroundColor(.gray)
                         Spacer()
                         

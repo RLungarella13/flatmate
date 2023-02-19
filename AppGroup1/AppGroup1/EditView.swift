@@ -57,8 +57,7 @@ struct EditView: View {
             }
             .navigationBarTitle("Edit Expense", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") { saveNewExpense()})
-            
-       
+
     }
     
     func saveNewExpense() {

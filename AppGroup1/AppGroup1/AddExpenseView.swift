@@ -15,10 +15,18 @@ struct AddExpenseView: View {
     @State var desc : String = ""
     @State var title : String = ""
     @State var total : Float = 0.0
+    @State private var selectedDate = Date()
+    
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
+        return formatter
+    }()
+    
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
         return formatter
     }()
     
@@ -38,6 +46,16 @@ struct AddExpenseView: View {
                         .keyboardType(.decimalPad)
                 }
                 
+                Section(header: Text("Date")) {
+                    DatePicker(
+                        "Select a date",
+                        selection: $selectedDate,
+                        in: Date()...,
+                        displayedComponents: [.date]
+                    )
+
+                    
+                }
                 
             }
             .navigationTitle("New Expense")
@@ -67,7 +85,7 @@ struct AddExpenseView: View {
         expense.title = title
         expense.desc = desc
         expense.total = Float(total)
-        expense.date = Date()
+        expense.date = selectedDate
         expense.uID = UUID()
         
         do {
@@ -91,3 +109,4 @@ struct AddExpenseView_Previews: PreviewProvider {
         AddExpenseView()
     }
 }
+
