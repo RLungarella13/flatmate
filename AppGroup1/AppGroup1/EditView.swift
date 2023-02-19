@@ -7,28 +7,34 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct EditView: View {
     
-
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) private var viewContext
-    
+    @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
   
-    
+    @State private var showDisclaimer = false
+    @State private var acceptedDisclaimer = false
     var expense: Expense
     
     @State var desc : String
     @State var title : String
     @State var total: Float
+    @State private var selectedDate = Date()
+    
+    let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        return formatter
+    }()
     
     
     init ( expense : Expense) {
         
         self.expense = expense
 
-        self._desc = State(wrappedValue: expense.desc!)
-        self._title = State(wrappedValue: expense.title!)
+        self._desc = State(wrappedValue: expense.desc ?? "")
+        self._title = State(wrappedValue: expense.title ?? "")
         self._total = State(wrappedValue: Float(expense.total))
     
     }
@@ -46,18 +52,44 @@ struct EditView: View {
                     TextField("description", text: $desc)
                 }
                 
-                Section(header: Text("Quantity")) {
-                    Stepper("\(total) $", value: $total)
+                Section(header: Text("Total")) {
+                    TextField("Totale", value: $total, formatter: formatter)
+                        .keyboardType(.decimalPad)
                 }
                 
-                Section(header: Text("Date last modified")) {
-                    Text(expense.date!.formatted())
+                Section(header: Text("Date")) {
+                    DatePicker(
+                        "Select a date",
+                        selection: $selectedDate,
+                        in: Date()...,
+                        displayedComponents: [.date]
+                    )
+                                
+                    
                 }
 
             }
             .navigationBarTitle("Edit Expense", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") { saveNewExpense()})
-
+            .navigationBarItems(trailing: Button("Delete"){
+                showDisclaimer = true
+            })
+            .sheet(isPresented: $showDisclaimer) {
+                VStack {
+                    Text("Are you sure?")
+                        .padding()
+                    HStack {
+                        Button(action: removeExpense){
+                            Text("Yes")
+                            
+                            }
+                        Button("No") {
+                            
+                            showDisclaimer = false
+                        }
+                    }
+                }
+            }
     }
     
     func saveNewExpense() {
@@ -65,6 +97,8 @@ struct EditView: View {
         expense.title = title
         expense.desc = desc
         expense.total = Float(total)
+        expense.date = selectedDate
+        dismiss()
         
         
         do {
@@ -76,6 +110,22 @@ struct EditView: View {
             
         }
         
+        
+    }
+    
+    func removeExpense() {
+        guard let index = allExpenses.firstIndex(of: expense) else { return }
+        viewContext.delete(allExpenses[index])
+        showDisclaimer = false
+
+        do {
+            try viewContext.save()
+            dismiss()
+        }
+        catch {
+
+            print(error.localizedDescription)
+        }
         
     }
 }

@@ -23,39 +23,35 @@ struct ContentView: View {
             Color("BackGround").ignoresSafeArea()
             NavigationView{
                 
-                
-                VStack(spacing: -10){
-                    //Titolo centrale con tasto di ricerca
-                    titleHomeView()
-                    //ClickableHStack()//Rettangolo con la visualizzazione dei membri
-                    //                            .background(Color("ForeGround"))
-                    //                            .cornerRadius(10)
-                    //                            .padding()
-                    VStack{
-                        DisclosureGroup(isExpanded: $expanded, content: {
-                            List{
-                                ForEach(allExpenses) {expense  in
-                                    TransactionCell(expense: expense)
-                                }
-                            }
-                            .onDelete { indexSet in
-                                removeExpense(at: indexSet)
-                            }
-                            
-                            
-                            Spacer()
-                        }, label: {
-                            Text("Transactions")
-                                .font(.system(size: 24))
-                                .bold()
-                                .foregroundColor(.primary)
-                        })
-                        .padding(20)
+                ScrollView{
+                    VStack(spacing: -10){
+                        //Titolo centrale con tasto di ricerca
+                        titleHomeView()
+                        //ClickableHStack()//Rettangolo con la visualizzazione dei membri
+                        //                            .background(Color("ForeGround"))
+                        //                            .cornerRadius(10)
+                        //                            .padding()
+                        VStack{
+                            DisclosureGroup(isExpanded: $expanded, content: {
+                                
+                                    ForEach(allExpenses) {expense  in
+                                        TransactionCell(expense: expense)
+                                    }
+                                    
+                                   
+                                Spacer()
+                            }, label: {
+                                Text("Transactions")
+                                    .font(.system(size: 24))
+                                    .bold()
+                                    .foregroundColor(.primary)
+                            })
+                            .padding(20)
+                        }
+                        Spacer()
                     }
-                    Spacer()
                 }
             }
-            
             VStack{
                 Spacer()
                 HStack{
@@ -66,25 +62,9 @@ struct ContentView: View {
             .padding(40)
         }
     }
-
     
-    func removeExpense( at offsets: IndexSet) {
-        
-        for index in offsets {
-            
-            viewContext.delete(allExpenses[index])
-        }
-        
-        
-        do {
-            try viewContext.save()
-        }
-        catch {
-            
-            print(error.localizedDescription)
-        }
-        
-    }
+    
+    
 }
 
 
@@ -176,12 +156,13 @@ struct TransactionCell: View{
                     }
                     .foregroundColor(.primary)
                     HStack{
-                        Text(expense.date!.formatted(.dateTime.day().month().year()))
+                        Text(expense.date?.formatted(.dateTime.day().month().year()) ?? "")
                             .foregroundColor(.gray)
                         Spacer()
                         
                         Text(String(format: "%.2f", expense.total)+"$")
                             .foregroundColor(.primary)
+                        
                     }
                 }.padding()
                 Spacer()
