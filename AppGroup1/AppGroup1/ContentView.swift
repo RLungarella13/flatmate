@@ -22,36 +22,40 @@ struct ContentView: View {
         ZStack{
             Color("BackGround").ignoresSafeArea()
             NavigationView{
-                ScrollView{
-                    VStack(spacing: -10){
-                        //Titolo centrale con tasto di ricerca
-                        titleHomeView()
-                        //ClickableHStack()//Rettangolo con la visualizzazione dei membri
-//                            .background(Color("ForeGround"))
-//                            .cornerRadius(10)
-//                            .padding()
-                        VStack{
-                            DisclosureGroup(isExpanded: $expanded, content: {
+                
+                
+                VStack(spacing: -10){
+                    //Titolo centrale con tasto di ricerca
+                    titleHomeView()
+                    //ClickableHStack()//Rettangolo con la visualizzazione dei membri
+                    //                            .background(Color("ForeGround"))
+                    //                            .cornerRadius(10)
+                    //                            .padding()
+                    VStack{
+                        DisclosureGroup(isExpanded: $expanded, content: {
+                            List{
                                 ForEach(allExpenses) {expense  in
                                     TransactionCell(expense: expense)
                                 }
-                                .onDelete { indexSet in
-                                    removeExpense(at: indexSet)
-                                }
-                                Spacer()
-                            }, label: {
-                                Text("Transactions")
-                                    .font(.system(size: 24))
-                                    .bold()
-                                    .foregroundColor(.primary)
-                            })
-                            .padding(20)
-                        }
-                        Spacer()
+                            }
+                            .onDelete { indexSet in
+                                removeExpense(at: indexSet)
+                            }
+                            
+                            
+                            Spacer()
+                        }, label: {
+                            Text("Transactions")
+                                .font(.system(size: 24))
+                                .bold()
+                                .foregroundColor(.primary)
+                        })
+                        .padding(20)
                     }
+                    Spacer()
                 }
-                
             }
+            
             VStack{
                 Spacer()
                 HStack{
@@ -62,7 +66,7 @@ struct ContentView: View {
             .padding(40)
         }
     }
-    
+
     
     func removeExpense( at offsets: IndexSet) {
         
