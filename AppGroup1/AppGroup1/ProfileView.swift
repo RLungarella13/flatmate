@@ -44,9 +44,12 @@ struct ProfileView: View {
                     }
                     .padding()
                 }
-                .navigationBarTitle("Account")
+           
             }
+            .navigationBarTitle("Account")
+            
         }
+        
         
     }
 }

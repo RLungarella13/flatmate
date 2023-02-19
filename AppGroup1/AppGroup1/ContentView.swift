@@ -18,54 +18,44 @@ struct ContentView: View {
     var body: some View {
         ZStack{
             Color("BackGround").ignoresSafeArea()
-            ScrollView{
-                VStack(spacing: -10){
-                    //Titolo centrale con tasto di ricerca
-                    titleHomeView()
-                    ClickableHStack()//Rettangolo con la visualizzazione dei membri
-                        .background(Color("ForeGround"))
-                        .cornerRadius(10)
-                        .padding()
-                    VStack{
-                        DisclosureGroup(isExpanded: $expanded, content: {
-                            NavigationView {
-                                
+            NavigationView{
+                ScrollView{
+                    VStack(spacing: -10){
+                        //Titolo centrale con tasto di ricerca
+                        titleHomeView()
+                        //ClickableHStack()//Rettangolo con la visualizzazione dei membri
+                            .background(Color("ForeGround"))
+                            .cornerRadius(10)
+                            .padding()
+                        VStack{
+                            DisclosureGroup(isExpanded: $expanded, content: {
                                 ForEach(allExpenses) {expense  in
-                                    
-                                    
                                     TransactionCell(expense: expense)
-                                    
                                 }
                                 .onDelete { indexSet in
                                     removeExpense(at: indexSet)
                                 }
                                 Spacer()
-                                
-                                .navigationBarItems( trailing: Button(action: {self.showingDetails.toggle()}) {
-                                    
-                                })
-                            }
-                        }, label: {
-                            Text("Transactions")
-                                .font(.system(size: 24))
-                                .bold()
-                                .foregroundColor(.primary)
-                        })
-                        .padding(20)
+                            }, label: {
+                                Text("Transactions")
+                                    .font(.system(size: 24))
+                                    .bold()
+                                    .foregroundColor(.primary)
+                            })
+                            .padding(20)
+                        }
+                        Spacer()
                     }
-                    Spacer()
-                    
                 }
-                
-            }
-            VStack{
-                Spacer()
-                HStack{
+                VStack{
                     Spacer()
-                    floatingAddButton()
+                    HStack{
+                        Spacer()
+                        floatingAddButton()
+                    }
                 }
+                .padding(40)
             }
-            .padding(40)
         }
     }
     
