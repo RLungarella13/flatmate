@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct SCoUser : Identifiable {
-    let id = UUID()
-    let name : String
-    let surname : String
+struct SCoUser: Identifiable{
+    var id : String
+    var name : String
+    var surname : String
     var balance : Float
     var email : String
+    var password : String
 }

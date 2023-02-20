@@ -39,7 +39,7 @@ struct HomeView: View {
                     .foregroundColor(.accentColor)
                     .shadow(radius: 2)
                     // SIGN UP
-                    NavigationLink(destination: LogInView()){
+                    NavigationLink(destination: SignUpView()){
                         Text("Sign Up")
                             .foregroundColor(.white)
                             .bold()

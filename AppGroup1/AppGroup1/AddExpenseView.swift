@@ -22,6 +22,7 @@ struct AddExpenseView: View {
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
+        
         return formatter
     }()
     
@@ -49,7 +50,7 @@ struct AddExpenseView: View {
                 Section(header: Text("Total")){
                     HStack{
                         Image(systemName: "eurosign")
-                        CurrencyTextField(value: $total)
+                        CurrencyTextField( value: $total)
                     }
                 }
                 

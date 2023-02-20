@@ -11,7 +11,7 @@ import Firebase
 @main
 struct AppGroup1App: App {
     @StateObject private var dataController = DataController()
-    
+    @StateObject var dataManager = DataManager()
     init(){
         FirebaseApp.configure()
     }
@@ -19,6 +19,7 @@ struct AppGroup1App: App {
         WindowGroup {
            TabBarView()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environmentObject(dataManager)
         }
     }
 }
