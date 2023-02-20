@@ -16,7 +16,6 @@ struct SearchView: View {
                 ForEach(filteredExpense, id: \.self) { expense in
                     HStack {
                         SearchCell(expense: expense)
-                        
                         Spacer()
                     }
                     .padding()

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct AddExpenseView: View {
     
@@ -41,9 +42,15 @@ struct AddExpenseView: View {
                     TextField("description", text: $desc)
                 }
                 
-                Section(header: Text("Total")) {
-                    TextField("Totale", value: $total, formatter: formatter)
-                        .keyboardType(.decimalPad)
+//                Section(header: Text("Total")) {
+//                    TextField("Totale", value: $total, formatter: formatter)
+//                        .keyboardType(.decimalPad)
+//                }
+                Section(header: Text("Total")){
+                    HStack{
+                        Image(systemName: "eurosign")
+                        CurrencyTextField(value: $total)
+                    }
                 }
                 
                 Section(header: Text("Date")) {
@@ -111,3 +118,33 @@ struct AddExpenseView_Previews: PreviewProvider {
     }
 }
 
+struct CurrencyTextField: View {
+    @Binding var value: Float
+
+    var formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        formatter.locale = Locale.current
+        return formatter
+    }()
+
+    var body: some View {
+        TextField("Total", value: $value, formatter: formatter)
+            .keyboardType(.decimalPad)
+            .onTapGesture {
+                DispatchQueue.main.async {
+                            UIApplication.shared.sendAction(#selector(UIResponder.selectAll(_:)), to: nil, from: nil, for: nil)
+                        }
+            }
+            .onReceive(Just(value)) { newValue in
+                let filtered = String(newValue).filter { "0123456789.".contains($0) }
+                if let result = Float(filtered) {
+                    value = result
+                } else {
+                    value = 0
+                }
+            }
+    }
+}
