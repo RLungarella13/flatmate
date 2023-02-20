@@ -17,9 +17,8 @@ struct AppGroup1App: App {
     }
     var body: some Scene {
         WindowGroup {
-            HomeView()
-//           TabBarView()
-//                .environment(\.managedObjectContext, dataController.container.viewContext)
+           TabBarView()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import Firebase
 
-struct LogInView: View {
+struct SignUpView: View {
     
     @State var email = ""
     @State var password = ""
@@ -35,9 +36,10 @@ struct LogInView: View {
                 .frame(height: 155)
                 Button(action: {
                     //Variable for not showing full screen page
+                    register()
                     logInState.isObserving = false
                 }){
-                    Text("Log In")
+                    Text("Sign Up")
                         .foregroundColor(Color("ForeGround"))
                         .bold()
                         .frame(width: 120)
@@ -51,10 +53,19 @@ struct LogInView: View {
             }
         }
     }
+    
+    func register(){
+        Auth.auth().createUser(withEmail: email, password: password){
+            result, error in
+            if error != nil{
+                print(error!.localizedDescription)
+            }
+        }
+    }
 }
 
-struct LogInView_Previews: PreviewProvider {
+struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        LogInView()
+        SignUpView()
     }
 }

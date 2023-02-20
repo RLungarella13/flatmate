@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct TabBarView: View {
-    @State var showSignLogView = true
+
+    @StateObject var logInState = LogInState()
     
     var body: some View {
+        
         TabView{
             ContentView()
                 .tabItem {
@@ -33,8 +35,9 @@ struct TabBarView: View {
             }
             
         }
-        .fullScreenCover(isPresented: $showSignLogView){
+        .fullScreenCover(isPresented: $logInState.isObserving){
             HomeView()
+                .environmentObject(logInState)
         }
         
     }
@@ -45,4 +48,8 @@ struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView()
     }
+}
+
+class LogInState: ObservableObject {
+    @Published var isObserving: Bool = true
 }

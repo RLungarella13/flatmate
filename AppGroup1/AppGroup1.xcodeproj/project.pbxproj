@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6D2518D329A3CCFE00D4AE53 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2518D229A3CCFE00D4AE53 /* HomeView.swift */; };
 		6D2518D729A3DEC400D4AE53 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2518D629A3DEC400D4AE53 /* LogInView.swift */; };
+		6D2518D929A3FA3800D4AE53 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2518D829A3FA3800D4AE53 /* SignUpView.swift */; };
 		6D291C18299CD7ED00220F66 /* AppGroup1App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D291C17299CD7ED00220F66 /* AppGroup1App.swift */; };
 		6D291C1A299CD7ED00220F66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D291C19299CD7ED00220F66 /* ContentView.swift */; };
 		6D291C1C299CD7EE00220F66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D291C1B299CD7EE00220F66 /* Assets.xcassets */; };
@@ -52,7 +53,8 @@
 /* Begin PBXFileReference section */
 		6D2518D229A3CCFE00D4AE53 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		6D2518D629A3DEC400D4AE53 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
-		6D291C14299CD7ED00220F66 /* AppGroup1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppGroup1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D2518D829A3FA3800D4AE53 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		6D291C14299CD7ED00220F66 /* Moneki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moneki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D291C17299CD7ED00220F66 /* AppGroup1App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup1App.swift; sourceTree = "<group>"; };
 		6D291C19299CD7ED00220F66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6D291C1B299CD7EE00220F66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -116,7 +118,7 @@
 		6D291C15299CD7ED00220F66 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6D291C14299CD7ED00220F66 /* AppGroup1.app */,
+				6D291C14299CD7ED00220F66 /* Moneki.app */,
 				6D291C24299CD7EE00220F66 /* AppGroup1Tests.xctest */,
 				6D291C2E299CD7EE00220F66 /* AppGroup1UITests.xctest */,
 			);
@@ -132,6 +134,7 @@
 				6D291C19299CD7ED00220F66 /* ContentView.swift */,
 				6DB83940299FE0210049AFEE /* ProfileView.swift */,
 				6D2518D629A3DEC400D4AE53 /* LogInView.swift */,
+				6D2518D829A3FA3800D4AE53 /* SignUpView.swift */,
 				6DB8394629A0E7850049AFEE /* ListsView.swift */,
 				6DB8394429A049810049AFEE /* EditView.swift */,
 				6F891F7729A222DC00B408E5 /* AddExpenseView.swift */,
@@ -176,9 +179,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6D291C13299CD7ED00220F66 /* AppGroup1 */ = {
+		6D291C13299CD7ED00220F66 /* Moneki */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6D291C38299CD7EE00220F66 /* Build configuration list for PBXNativeTarget "AppGroup1" */;
+			buildConfigurationList = 6D291C38299CD7EE00220F66 /* Build configuration list for PBXNativeTarget "Moneki" */;
 			buildPhases = (
 				6D291C10299CD7ED00220F66 /* Sources */,
 				6D291C11299CD7ED00220F66 /* Frameworks */,
@@ -188,13 +191,13 @@
 			);
 			dependencies = (
 			);
-			name = AppGroup1;
+			name = Moneki;
 			packageProductDependencies = (
 				6D3533E229A3CB0E001BF10D /* FirebaseAuth */,
 				6D3533E429A3CB0E001BF10D /* FirebaseFirestore */,
 			);
 			productName = AppGroup1;
-			productReference = 6D291C14299CD7ED00220F66 /* AppGroup1.app */;
+			productReference = 6D291C14299CD7ED00220F66 /* Moneki.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6D291C23299CD7EE00220F66 /* AppGroup1Tests */ = {
@@ -272,7 +275,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6D291C13299CD7ED00220F66 /* AppGroup1 */,
+				6D291C13299CD7ED00220F66 /* Moneki */,
 				6D291C23299CD7EE00220F66 /* AppGroup1Tests */,
 				6D291C2D299CD7EE00220F66 /* AppGroup1UITests */,
 			);
@@ -323,6 +326,7 @@
 				6D2518D329A3CCFE00D4AE53 /* HomeView.swift in Sources */,
 				6F891F7C29A235C800B408E5 /* SExpenseStore.swift in Sources */,
 				6D71939F299F8766006A3D73 /* TabBarView.swift in Sources */,
+				6D2518D929A3FA3800D4AE53 /* SignUpView.swift in Sources */,
 				6DB8394529A049810049AFEE /* EditView.swift in Sources */,
 				6D291C18299CD7ED00220F66 /* AppGroup1App.swift in Sources */,
 				6F891F7629A1872400B408E5 /* Persistence.swift in Sources */,
@@ -351,12 +355,12 @@
 /* Begin PBXTargetDependency section */
 		6D291C26299CD7EE00220F66 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6D291C13299CD7ED00220F66 /* AppGroup1 */;
+			target = 6D291C13299CD7ED00220F66 /* Moneki */;
 			targetProxy = 6D291C25299CD7EE00220F66 /* PBXContainerItemProxy */;
 		};
 		6D291C30299CD7EE00220F66 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6D291C13299CD7ED00220F66 /* AppGroup1 */;
+			target = 6D291C13299CD7ED00220F66 /* Moneki */;
 			targetProxy = 6D291C2F299CD7EE00220F66 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -626,7 +630,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6D291C38299CD7EE00220F66 /* Build configuration list for PBXNativeTarget "AppGroup1" */ = {
+		6D291C38299CD7EE00220F66 /* Build configuration list for PBXNativeTarget "Moneki" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6D291C39299CD7EE00220F66 /* Debug */,

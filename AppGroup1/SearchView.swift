@@ -73,7 +73,7 @@ struct SearchCell: View{
                     }
                     .foregroundColor(.primary)
                     HStack{
-                        Text(expense.date!.formatted(.dateTime.day().month().year()))
+                        Text(expense.date?.formatted(.dateTime.day().month().year()) ?? "")
                             .foregroundColor(.gray)
                         Spacer()
                         

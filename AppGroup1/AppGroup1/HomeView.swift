@@ -11,13 +11,16 @@ import Firebase
 struct HomeView: View {
     @State var email = ""
     @State var password = ""
+    
+    @EnvironmentObject var logInState: LogInState
+    
     var body: some View {
         NavigationView{
             ZStack{
                 Color("BackGround").ignoresSafeArea()
                 VStack{
-                    Image("logoCat")
-                        .scaleEffect(0.3)
+                    AdaptiveImage(light: Image("logoCatLight"), dark: Image("logoCatDark"))
+                        .scaleEffect(0.4)
                         .position(x: 200, y:150)
                     
                 }
@@ -27,7 +30,7 @@ struct HomeView: View {
                     // LOG IN
                     NavigationLink(destination: LogInView()){
                         Text("Log In")
-                            .foregroundColor(Color("ForeGround"))
+                            .foregroundColor(.white)
                             .bold()
                             .frame(width: 120)
                     }
@@ -38,7 +41,7 @@ struct HomeView: View {
                     // SIGN UP
                     NavigationLink(destination: LogInView()){
                         Text("Sign Up")
-                            .foregroundColor(Color("ForeGround"))
+                            .foregroundColor(.white)
                             .bold()
                             .frame(width: 120)
                     }
@@ -60,6 +63,20 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+struct AdaptiveImage: View {
+    @Environment(\.colorScheme) var colorScheme
+    let light: Image
+    let dark: Image
+
+    @ViewBuilder var body: some View {
+        if colorScheme == .light {
+            light
+        } else {
+            dark
+        }
     }
 }
 //

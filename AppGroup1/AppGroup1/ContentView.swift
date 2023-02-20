@@ -13,11 +13,8 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
     
-    
     @State var expanded = true
     @State private var showingDetails = false
-    
-    
     
     var body: some View {
         NavigationView{
@@ -32,6 +29,7 @@ struct ContentView: View {
                         //                            .cornerRadius(10)
                         //                            .padding()
                         VStack{
+                            Spacer().frame(height: 20)
                             DisclosureGroup(isExpanded: $expanded, content: {
                                 
                                 ForEach(allExpenses) {expense  in
