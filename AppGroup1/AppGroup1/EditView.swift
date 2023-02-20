@@ -70,7 +70,8 @@ struct EditView: View {
 
             }
             .navigationBarTitle("Edit Expense", displayMode: .inline)
-            .navigationBarItems(trailing: Button("Save") { saveNewExpense()})
+            .navigationBarItems(trailing: Button("Save") { saveNewExpense()}.disabled(title == ""))
+            
             .navigationBarItems(trailing: Button("Delete"){
                 showDisclaimer = true
             })
