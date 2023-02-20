@@ -13,6 +13,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
     
+    
     @State var expanded = true
     @State private var showingDetails = false
     
@@ -101,7 +102,7 @@ struct titleHomeView: View{
         VStack {
             CustomNavBar(left: {}, center: {
                 VStack{
-                    Text("00,00€")
+                    Text("00.00")
                         .font(.title)
                         .bold()
                     

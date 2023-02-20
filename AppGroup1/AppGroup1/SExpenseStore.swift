@@ -7,6 +7,6 @@
 
 import Foundation
 
-class CoUserStore : ObservableObject {
+class ExpenseStore : ObservableObject {
     @Published var allExpenses = [SExpense]()
 }

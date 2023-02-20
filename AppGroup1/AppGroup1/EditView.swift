@@ -73,24 +73,14 @@ struct EditView: View {
             .navigationBarItems(trailing: Button("Save") { saveNewExpense()}.disabled(title == ""))
             
             .navigationBarItems(trailing: Button("Delete"){
-                showDisclaimer = true
+                acceptedDisclaimer = true
             })
-            .sheet(isPresented: $showDisclaimer) {
-                VStack {
-                    Text("Are you sure?")
-                        .padding()
-                    HStack {
-                        Button(action: removeExpense){
-                            Text("Yes")
-                            
-                            }
-                        Button("No") {
-                            
-                            showDisclaimer = false
-                        }
-                    }
-                }
+            .alert(isPresented: $acceptedDisclaimer){
+                Alert(title: Text("Are you sure?"), message: Text(""), primaryButton: .default(Text("Yes")) {
+                    removeExpense()
+                }, secondaryButton: .cancel(Text("No")))
             }
+            
     }
     
     func saveNewExpense() {
