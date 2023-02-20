@@ -19,10 +19,9 @@ struct ContentView: View {
     
     
     var body: some View {
-        ZStack{
-            Color("BackGround").ignoresSafeArea()
-            NavigationView{
-                
+        NavigationView{
+            ZStack{
+                Color("BackGround").ignoresSafeArea()
                 ScrollView{
                     VStack(spacing: -10){
                         //Titolo centrale con tasto di ricerca
@@ -34,11 +33,11 @@ struct ContentView: View {
                         VStack{
                             DisclosureGroup(isExpanded: $expanded, content: {
                                 
-                                    ForEach(allExpenses) {expense  in
-                                        TransactionCell(expense: expense)
-                                    }
-                                    
-                                   
+                                ForEach(allExpenses) {expense  in
+                                    TransactionCell(expense: expense)
+                                }
+                                
+                                
                                 Spacer()
                             }, label: {
                                 Text("Transactions")
@@ -51,15 +50,16 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-            }
-            VStack{
-                Spacer()
-                HStack{
+                VStack{
                     Spacer()
-                    floatingAddButton()
+                    HStack{
+                        Spacer()
+                        floatingAddButton()
+                    }
                 }
+                .padding(40)
             }
-            .padding(40)
+            
         }
     }
     

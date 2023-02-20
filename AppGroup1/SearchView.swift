@@ -8,11 +8,11 @@ struct SearchView: View {
     
     @State var searchText = ""
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
-
+    
     
     var body: some View {
         NavigationView {
-            
+            List{
                 ForEach(filteredExpense, id: \.self) { expense in
                     HStack {
                         SearchCell(expense: expense)
@@ -21,16 +21,17 @@ struct SearchView: View {
                     }
                     .padding()
                 }
+                .searchable(text: $searchText)
+                .navigationTitle("Search Transaction")
+                .navigationBarItems(leading: Button(action:{
+                    
+                    presentationMode.wrappedValue.dismiss()
+                    
+                }){
+                    Text("Dismiss")
+                })
+            }
             
-            .searchable(text: $searchText)
-            .navigationTitle("Search Transaction")
-            .navigationBarItems(leading: Button(action:{
-                
-                presentationMode.wrappedValue.dismiss()
-                
-            }){
-                Text("Dismiss")
-            })
         }
     }
     
