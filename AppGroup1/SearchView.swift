@@ -11,24 +11,27 @@ struct SearchView: View {
     
     
     var body: some View {
+        
         NavigationView {
-            List{
+            ScrollView{
                 ForEach(filteredExpense, id: \.self) { expense in
                     HStack {
                         SearchCell(expense: expense)
+                            .foregroundColor(.red)
                         Spacer()
                     }
                     .padding()
                 }
-                .searchable(text: $searchText)
-                .navigationTitle("Search Transaction")
-                .navigationBarItems(leading: Button(action:{
-                    
-                    presentationMode.wrappedValue.dismiss()
-                    
-                }){
-                    Text("Dismiss")
-                })
+                Spacer()
+                    .searchable(text: $searchText)
+                    .navigationTitle("Search Transaction")
+                    .navigationBarItems(leading: Button(action:{
+                        
+                        presentationMode.wrappedValue.dismiss()
+                        
+                    }){
+                        Text("Dismiss")
+                    })
             }
             
         }

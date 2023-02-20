@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TabBarView: View {
+    @State var showSignLogView = true
+    
     var body: some View {
         TabView{
             ContentView()
@@ -30,6 +32,9 @@ struct TabBarView: View {
                     
             }
             
+        }
+        .fullScreenCover(isPresented: $showSignLogView){
+            HomeView()
         }
         
     }

@@ -63,7 +63,7 @@ struct EditView: View {
                     DatePicker(
                         "Select a date",
                         selection: $selectedDate,
-                        in: Date()...,
+                        in: ...Date(),
                         displayedComponents: [.date]
                     )
                                 
