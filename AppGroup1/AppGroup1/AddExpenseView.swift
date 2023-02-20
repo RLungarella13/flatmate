@@ -50,7 +50,7 @@ struct AddExpenseView: View {
                     DatePicker(
                         "Select a date",
                         selection: $selectedDate,
-                        in: Date()...,
+                        in: ...Date(),
                         displayedComponents: [.date]
                     )
                                 
@@ -68,12 +68,13 @@ struct AddExpenseView: View {
             }, trailing: Button(action:{
                 
                 saveNewExpense()
-                dismiss()
                 
+                dismiss()
+                    
                 
             }) {
                 Text("Save")
-            })
+            }.disabled(title == ""))
         }
     }
     
