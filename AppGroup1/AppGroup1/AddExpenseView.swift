@@ -81,7 +81,7 @@ struct AddExpenseView: View {
                 
             }) {
                 Text("Save")
-            }.disabled(title == ""))
+            }.disabled(title == "" || total == 0))
         }
     }
     

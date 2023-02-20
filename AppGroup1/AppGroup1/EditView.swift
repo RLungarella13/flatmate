@@ -52,9 +52,11 @@ struct EditView: View {
                     TextField("description", text: $desc)
                 }
                 
-                Section(header: Text("Total")) {
-                    TextField("Totale", value: $total, formatter: formatter)
-                        .keyboardType(.decimalPad)
+                Section(header: Text("Total")){
+                    HStack{
+                        Image(systemName: "eurosign")
+                        CurrencyTextField(value: $total)
+                    }
                 }
                 
                 Section(header: Text("Date")) {
@@ -70,7 +72,7 @@ struct EditView: View {
 
             }
             .navigationBarTitle("Edit Expense", displayMode: .inline)
-            .navigationBarItems(trailing: Button("Save") { saveNewExpense()}.disabled(title == ""))
+            .navigationBarItems(trailing: Button("Save") { saveNewExpense()}.disabled(title == "" || total == 0))
             
             .navigationBarItems(trailing: Button("Delete"){
                 acceptedDisclaimer = true
