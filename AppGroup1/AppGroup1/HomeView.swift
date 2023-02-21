@@ -11,7 +11,7 @@ import Firebase
 struct HomeView: View {
     @State var email = ""
     @State var password = ""
-    
+    @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var logInState: LogInState
     
     var body: some View {
@@ -25,7 +25,11 @@ struct HomeView: View {
                     
                 }
                 VStack(spacing: 30){
-                    
+                    ForEach(dataManager.users, id: \.id){ user in
+                        Text(user.name)
+                            .foregroundColor(.black)
+                            .font(.system(size: 80))
+                    }
                     Spacer()
                     // LOG IN
                     NavigationLink(destination: LogInView()){
@@ -63,6 +67,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(DataManager())
     }
 }
 

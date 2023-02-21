@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabBarView: View {
-
+    @EnvironmentObject var dataManager: DataManager
     @StateObject var logInState = LogInState()
     
     var body: some View {
@@ -16,19 +16,19 @@ struct TabBarView: View {
         TabView{
             ContentView()
                 .tabItem {
-                    Image(systemName: "dollarsign.circle")
-                    Text("Spese")
+                    Image(systemName: "dollarsign.square")
+                    Text("Expenses")
                 }
             
-            ListsView()
-                .tabItem {
-                    Image(systemName: "note.text")
-                    Text("Note")
-                }
+//            ListsView()
+//                .tabItem {
+//                    Image(systemName: "square.and.pencil")
+//                    Text("Notes")
+//                }
             
             ProfileView()
                 .tabItem {
-                    Image(systemName: "person.circle")
+                    Image(systemName: "person.crop.square")
                     Text("Account")
                 
                     

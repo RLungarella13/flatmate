@@ -12,7 +12,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
-    
+    @EnvironmentObject var dataManager: DataManager
     @State var expanded = true
     @State private var showingDetails = false
     
@@ -35,6 +35,8 @@ struct ContentView: View {
                                 ForEach(allExpenses) {expense  in
                                     TransactionCell(expense: expense)
                                 }
+                                
+                                
                                 
                                 
                                 Spacer()
