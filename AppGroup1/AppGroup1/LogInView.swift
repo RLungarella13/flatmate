@@ -37,7 +37,6 @@ struct LogInView: View {
                 Button(action: {
                     login()
                     //Variable for not showing full screen page
-                    logInState.isObserving = false
                 }){
                     Text("Log In")
                         .foregroundColor(.white)

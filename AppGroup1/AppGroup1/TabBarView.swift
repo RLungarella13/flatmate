@@ -27,10 +27,11 @@ struct TabBarView: View {
                 }
             
             ProfileView()
+                .environmentObject(logInState)
                 .tabItem {
                     Image(systemName: "person.crop.square")
                     Text("Account")
-                
+                        
                     
             }
             

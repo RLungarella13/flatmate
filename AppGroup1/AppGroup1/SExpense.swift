@@ -8,9 +8,9 @@
 import Foundation
 
 struct SExpense : Identifiable {
-    let id = UUID()
-    let title : String
-    let desc : String
+    var id : String
+    var title : String
+    var desc : String
     var total : Float
     var date : Date
 }

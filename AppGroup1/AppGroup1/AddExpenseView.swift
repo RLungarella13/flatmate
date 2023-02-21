@@ -12,12 +12,13 @@ struct AddExpenseView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var dataManager : DataManager
     
     @State var desc : String = ""
     @State var title : String = ""
     @State var total : Float = 0.0
     @State private var selectedDate = Date()
-    
+    let id = UUID()
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -77,6 +78,7 @@ struct AddExpenseView: View {
                 
                 saveNewExpense()
                 
+                dataManager.addExpense(id: id ,title: title, desc: desc, total: total, date: selectedDate)
                 dismiss()
                     
                 

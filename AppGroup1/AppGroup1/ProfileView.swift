@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 
 struct ProfileView: View {
+    @EnvironmentObject var logInState: LogInState
     var body: some View {
         NavigationView{
             ZStack{
@@ -36,6 +37,7 @@ struct ProfileView: View {
                             Spacer()
                             Button(action:{
                                 logout()
+                                logInState.isObserving = true
                             }){
                                 Text("Log out")
                             }

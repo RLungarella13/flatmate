@@ -81,7 +81,7 @@ struct SignUpView: View {
                 print(error!.localizedDescription)
             }
         }
-        dataManager.addUser(email: email, password: password)
+//        dataManager.addUser(email: email, password: password)
     }
 }
 

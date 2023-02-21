@@ -25,11 +25,11 @@ struct HomeView: View {
                     
                 }
                 VStack(spacing: 30){
-                    ForEach(dataManager.users, id: \.id){ user in
-                        Text(user.name)
-                            .foregroundColor(.black)
-                            .font(.system(size: 80))
-                    }
+//                    ForEach(dataManager.users, id: \.id){ user in
+//                        Text(user.name)
+//                            .foregroundColor(.black)
+//                            .font(.system(size: 80))
+//                    }
                     Spacer()
                     // LOG IN
                     NavigationLink(destination: LogInView()){
