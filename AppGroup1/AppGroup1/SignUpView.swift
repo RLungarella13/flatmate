@@ -55,7 +55,7 @@ struct SignUpView: View {
                     logInState.isObserving = false
                 }){
                     Text("Sign Up")
-                        .foregroundColor(Color("ForeGround"))
+                        .foregroundColor(.white)
                         .bold()
                         .frame(width: 120)
                 }

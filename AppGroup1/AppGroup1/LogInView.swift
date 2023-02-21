@@ -40,7 +40,7 @@ struct LogInView: View {
                     logInState.isObserving = false
                 }){
                     Text("Log In")
-                        .foregroundColor(Color("ForeGround"))
+                        .foregroundColor(.white))
                         .bold()
                         .frame(width: 120)
                 }
