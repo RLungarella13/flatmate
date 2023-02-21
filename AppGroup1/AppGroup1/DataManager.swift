@@ -27,7 +27,7 @@ class DataManager: ObservableObject{
             }
             if let snapshot = snapshot {
                 for document in snapshot.documents {
-                    let data = document.data ( )
+                    let data = document.data()
                     let id = data["id"] as? String ?? ""
                     let title = data["title"] as? String ?? ""
                     let desc = data["surname"] as? String ?? ""

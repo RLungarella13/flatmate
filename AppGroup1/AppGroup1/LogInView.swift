@@ -16,7 +16,7 @@ struct LogInView: View {
     var body: some View {
         ZStack{
             Color("BackGround").ignoresSafeArea()
-            VStack{
+            VStack(spacing:20){
                 Form{
                     Section{
                         HStack{
@@ -31,7 +31,17 @@ struct LogInView: View {
                         }
                     }
                 }
-                .frame(height: 155)
+                .frame(height: 130)
+                HStack{
+                    Button(action: {
+                        
+                    }){
+                        Text("Forgotten Password?")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 16))
+                            .underline()
+                    }
+                }
                 Button(action: {
                     login()
                 }){

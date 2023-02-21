@@ -27,8 +27,8 @@ struct HomeView: View {
                 Color("BackGround").ignoresSafeArea()
                 VStack{
                     AdaptiveImage(light: Image("logoCatLight"), dark: Image("logoCatDark"))
-                        .scaleEffect(0.4)
-                        .position(x: 200, y:150)
+                        .scaleEffect(0.5)
+                    Spacer()
                     
                 }
                 VStack(spacing: 30){
@@ -46,6 +46,7 @@ struct HomeView: View {
                             .foregroundColor(.white)
                             .bold()
                             .frame(width: 120)
+                            .shadow(radius: 1)
                     }
                     .font(.title)
                     .buttonStyle(.borderedProminent)
@@ -57,6 +58,7 @@ struct HomeView: View {
                             .foregroundColor(.white)
                             .bold()
                             .frame(width: 120)
+                            .shadow(radius: 1)
                     }
                     .font(.title)
                     .buttonStyle(.borderedProminent)

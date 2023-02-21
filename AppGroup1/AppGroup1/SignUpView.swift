@@ -17,6 +17,8 @@ struct SignUpView: View {
     
     @State private var newUser = ""
     @State private var userIsLoggedIn = false
+    @State private var name = ""
+    @State private var surname = ""
     
     
     var body: some View {
@@ -26,20 +28,40 @@ struct SignUpView: View {
             Color("BackGround").ignoresSafeArea()
             VStack{
                 Form{
-                    Section{
+                    Section(header: Text("NAME*")){
+                        TextField("Name", text: $name)
+                    }
+                    Section(header: Text("SURNAME*")){
+                        TextField("Surname", text: $name)
+                    }
+                    Section(header: HStack{
+                        Text("EMAIL*")
+                        Spacer()
+                        Image(systemName: "envelope")
+                            .font(.system(size: 20))
+                    }){
                         HStack{
-                            Image(systemName: "envelope")
                             TextField("Email", text: $email){
                             }
                         }
+                        
+                    }
+                    Section(header: HStack{
+                        Text("PASSWORD*")
+                        Spacer()
+                        Image(systemName: "key.horizontal")
+                            .font(.system(size: 20))
+                    }){
                         HStack{
-                            Image(systemName: "key.horizontal")
                             SecureField("Password", text: $password){
                             }
                         }
+                        HStack{
+                            SecureField("Confirm Password", text: $password)
+                        }
                     }
                 }
-                .frame(height: 155)
+                .frame(height: 450)
                 Button(action: {
                     //Variable for not showing full screen page
                     register()
