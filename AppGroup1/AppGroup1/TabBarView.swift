@@ -9,7 +9,6 @@ import SwiftUI
 
 struct TabBarView: View {
     @EnvironmentObject var dataManager: DataManager
-    @StateObject var logInState = LogInState()
     
     var body: some View {
         
@@ -27,7 +26,6 @@ struct TabBarView: View {
                 }
             
             ProfileView()
-                .environmentObject(logInState)
                 .tabItem {
                     Image(systemName: "person.crop.square")
                     Text("Account")
@@ -49,8 +47,4 @@ struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView()
     }
-}
-
-class LogInState: ObservableObject {
-    @Published var isObserving: Bool = true
 }

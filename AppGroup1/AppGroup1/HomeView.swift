@@ -12,9 +12,16 @@ struct HomeView: View {
     @State var email = ""
     @State var password = ""
     @EnvironmentObject var dataManager: DataManager
-    @EnvironmentObject var logInState: LogInState
+    @EnvironmentObject var obsUser: ObservableBool
     
-    var body: some View {
+    var body: some View{
+        if obsUser.isLoggedIn{
+            TabBarView()
+        }else{
+            content
+        }
+    }
+    var content: some View {
         NavigationView{
             ZStack{
                 Color("BackGround").ignoresSafeArea()
@@ -25,11 +32,13 @@ struct HomeView: View {
                     
                 }
                 VStack(spacing: 30){
-//                    ForEach(dataManager.users, id: \.id){ user in
-//                        Text(user.name)
-//                            .foregroundColor(.black)
-//                            .font(.system(size: 80))
-//                    }
+                    ForEach(dataManager.expenses, id: \.id){ expense in
+                        Text(expense.title)
+                            .foregroundColor(.black)
+                            .font(.system(size: 80))
+                        
+                    }
+                    
                     Spacer()
                     // LOG IN
                     NavigationLink(destination: LogInView()){
@@ -60,6 +69,14 @@ struct HomeView: View {
                 }
                 .padding(70)
             }
+        }.onAppear{
+            Auth.auth().addStateDidChangeListener{ auth, user in
+                if user != nil{
+                    obsUser.isLoggedIn.toggle()
+                }
+                
+            }
+            
         }
     }
 }
@@ -84,19 +101,3 @@ struct AdaptiveImage: View {
         }
     }
 }
-//
-//Form{
-//    Section{
-//        TextField("Email", text: $email)
-//            .foregroundColor(.primary)
-//            .textFieldStyle(.plain)
-//            .font(.system(size: 20))
-//    }
-//    Section{
-//        SecureField("Password", text: $password)
-//            .foregroundColor(.primary)
-//            .textFieldStyle(.plain)
-//            .font(.system(size: 20))
-//    }
-//
-//}

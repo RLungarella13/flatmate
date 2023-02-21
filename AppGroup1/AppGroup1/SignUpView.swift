@@ -13,7 +13,6 @@ struct SignUpView: View {
     @State var email = ""
     @State var password = ""
     
-    @EnvironmentObject var logInState: LogInState
     @EnvironmentObject var dataManager : DataManager
     
     @State private var newUser = ""
@@ -44,8 +43,7 @@ struct SignUpView: View {
                 Button(action: {
                     //Variable for not showing full screen page
                     register()
-                    
-                    logInState.isObserving = false
+
                 }){
                     Text("Sign Up")
                         .foregroundColor(.white)
@@ -60,15 +58,7 @@ struct SignUpView: View {
                 
             }
         }
-        .onAppear{
-            Auth.auth().addStateDidChangeListener{ auth, user in
-                if user != nil{
-                    userIsLoggedIn.toggle()
-                }
-                
-            }
-            
-        }
+        
     }
     
     
@@ -79,6 +69,9 @@ struct SignUpView: View {
             result, error in
             if error != nil{
                 print(error!.localizedDescription)
+            }
+            else{
+                
             }
         }
 //        dataManager.addUser(email: email, password: password)

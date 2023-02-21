@@ -22,7 +22,7 @@ class DataManager: ObservableObject{
         let ref = db.collection("Expense")
         ref.getDocuments { snapshot, error in
             guard error == nil else {
-                print (error!.localizedDescription)
+                print (error!.localizedDescription) 
                 return
             }
             if let snapshot = snapshot {
@@ -33,7 +33,7 @@ class DataManager: ObservableObject{
                     let desc = data["surname"] as? String ?? ""
                     let total = data["total"] as? Float ?? 0
                 
-                    let date = data["date"] as! Date
+                    let date = data["date"] as? Date ?? Date()
                     let expense = SExpense(id: id, title: title, desc: desc, total: total, date: date)
                     self.expenses.append(expense)
                 }

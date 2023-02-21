@@ -12,17 +12,25 @@ import Firebase
 struct AppGroup1App: App {
     @StateObject private var dataController = DataController()
     @StateObject var dataManager = DataManager()
+    @StateObject var obsUser = ObservableBool()
+    
     init(){
         FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
-           TabBarView()
+           HomeView()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(dataManager)
+                .environmentObject(obsUser)
         }
     }
 }
+
+class ObservableBool: ObservableObject{
+    @Published var isLoggedIn = false
+}
+
 //import SwiftUI
 //import FirebaseCore
 //content_copy

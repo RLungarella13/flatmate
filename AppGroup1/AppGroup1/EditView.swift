@@ -74,14 +74,14 @@ struct EditView: View {
             .navigationBarTitle("Edit Expense", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") { saveNewExpense()}.disabled(title == "" || total == 0))
             
-//            .navigationBarItems(trailing: Button("Delete"){
-//                acceptedDisclaimer = true
-//            })
-//            .alert(isPresented: $acceptedDisclaimer){
-//                Alert(title: Text("Are you sure?"), message: Text(""), primaryButton: .default(Text("Yes")) {
-//                    removeExpense()
-//                }, secondaryButton: .cancel(Text("No")))
-//            }
+            .navigationBarItems(trailing: Button("Delete"){
+                acceptedDisclaimer = true
+            })
+            .alert(isPresented: $acceptedDisclaimer){
+                Alert(title: Text("Are you sure?"), message: Text(""), primaryButton: .default(Text("Yes")) {
+                    removeExpense()
+                }, secondaryButton: .cancel(Text("No")))
+            }
             
     }
     

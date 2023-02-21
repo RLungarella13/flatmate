@@ -13,8 +13,6 @@ struct LogInView: View {
     @State var email = ""
     @State var password = ""
     
-    @EnvironmentObject var logInState: LogInState
-    
     var body: some View {
         ZStack{
             Color("BackGround").ignoresSafeArea()
@@ -36,7 +34,6 @@ struct LogInView: View {
                 .frame(height: 155)
                 Button(action: {
                     login()
-                    //Variable for not showing full screen page
                 }){
                     Text("Log In")
                         .foregroundColor(.white)
@@ -51,6 +48,8 @@ struct LogInView: View {
                 
             }
         }
+        
+
     }
     
     func login() {
@@ -58,7 +57,7 @@ struct LogInView: View {
             if error != nil {
                 print (error!.localizedDescription)
             }else{
-                logInState.isObserving = false
+                
             }
         }
     }
