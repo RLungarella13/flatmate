@@ -85,7 +85,7 @@ struct ListsView: View {
                     
                 }
                 
-                .padding(.trailing)
+               
             }
             .navigationBarTitle("Notes")
             .navigationBarItems(
