@@ -19,15 +19,8 @@ struct SignUpView: View {
     @State private var newUser = ""
     @State private var userIsLoggedIn = false
     
-    var body: some View{
-        if userIsLoggedIn{
-//            dataManager.addUser(email: email, password: password)
-        }
-        else{
-            content
-        }
-    }
-    var content: some View {
+    
+    var body: some View {
         
         
         ZStack{

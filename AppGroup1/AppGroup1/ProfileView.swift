@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ProfileView: View {
     var body: some View {
@@ -34,7 +35,7 @@ struct ProfileView: View {
                         HStack{
                             Spacer()
                             Button(action:{
-                                
+                                logout()
                             }){
                                 Text("Log out")
                             }
@@ -51,6 +52,13 @@ struct ProfileView: View {
         }
         
         
+    }
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch let error {
+            print("Errore durante il logout: \(error.localizedDescription)")
+        }
     }
 }
 

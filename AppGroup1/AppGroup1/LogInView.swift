@@ -40,7 +40,7 @@ struct LogInView: View {
                     logInState.isObserving = false
                 }){
                     Text("Log In")
-                        .foregroundColor(.white))
+                        .foregroundColor(.white)
                         .bold()
                         .frame(width: 120)
                 }
@@ -58,6 +58,8 @@ struct LogInView: View {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil {
                 print (error!.localizedDescription)
+            }else{
+                logInState.isObserving = false
             }
         }
     }
