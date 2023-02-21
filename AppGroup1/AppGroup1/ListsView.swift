@@ -56,7 +56,7 @@ struct ListsView: View {
                                     }
                                     .padding()
                                     .frame(width: 150, height: 150)
-                                    .background(selectedNotes.contains(note) ? Color.orange : Color.orange.opacity(0.2))
+                                    .background(selectedNotes.contains(note) ? Color.orange : Color("ForeGround"))
                                     .cornerRadius(10)
                                 }
                             }
@@ -97,6 +97,7 @@ struct ListsView: View {
                                     selectedNotes.contains(note)
                                 }
                                 selectedNotes.removeAll()
+                                isEditing = false
                             }) {
                                 Text("Delete")
                             }
@@ -106,7 +107,7 @@ struct ListsView: View {
                             selectedNotes.removeAll()
                         }) {
                             Text(isEditing ? "Done" : "Edit")
-                        }
+                        }.disabled(notes.isEmpty)
                     }
             )
             .sheet(isPresented: $isAddingNote) {
@@ -158,7 +159,7 @@ struct CreateNoteView: View {
                         notes.append(Note(title: noteTitle, content: noteContent))
                     }
                     isPresented = false
-                }
+                }.disabled(noteTitle == "")
             )
         }
         

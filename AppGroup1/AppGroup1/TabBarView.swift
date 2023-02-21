@@ -20,11 +20,11 @@ struct TabBarView: View {
                     Text("Expenses")
                 }
             
-//            ListsView()
-//                .tabItem {
-//                    Image(systemName: "square.and.pencil")
-//                    Text("Notes")
-//                }
+            ListsView()
+                .tabItem {
+                    Image(systemName: "square.and.pencil")
+                    Text("Notes")
+                }
             
             ProfileView()
                 .tabItem {
@@ -35,10 +35,10 @@ struct TabBarView: View {
             }
             
         }
-        .fullScreenCover(isPresented: $logInState.isObserving){
-            HomeView()
-                .environmentObject(logInState)
-        }
+//        .fullScreenCover(isPresented: $logInState.isObserving){
+//            HomeView()
+//                .environmentObject(logInState)
+//        }
         
     }
         
