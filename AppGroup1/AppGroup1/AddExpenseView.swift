@@ -16,9 +16,10 @@ struct AddExpenseView: View {
     
     @State var desc : String = ""
     @State var title : String = ""
+    @State var id : String = ""
     @State var total : Float = 0.0
     @State private var selectedDate = Date()
-    let id = UUID()
+    
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()

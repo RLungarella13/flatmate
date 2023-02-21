@@ -41,7 +41,7 @@ class DataManager: ObservableObject{
         }
     }
     
-    func addExpense(id: UUID, title: String, desc: String, total: Float, date: Date) {
+    func addExpense(id: String, title: String, desc: String, total: Float, date: Date) {
         
         let db = Firestore.firestore()
         let ref = db.collection ("Expense").document("id")
