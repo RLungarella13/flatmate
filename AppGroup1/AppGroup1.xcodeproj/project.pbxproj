@@ -133,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				6D71939E299F8766006A3D73 /* TabBarView.swift */,
-				6DC673B429A179FA00AEC424 /* DataController.swift */,
 				6D2518D229A3CCFE00D4AE53 /* HomeView.swift */,
 				6D291C19299CD7ED00220F66 /* ContentView.swift */,
 				6DB83940299FE0210049AFEE /* ProfileView.swift */,
@@ -145,14 +144,15 @@
 				6F891F7729A222DC00B408E5 /* AddExpenseView.swift */,
 				6D8D00A1299FA1F5001E1AFF /* SearchView.swift */,
 				6D291C17299CD7ED00220F66 /* AppGroup1App.swift */,
-				6F891F7529A1872400B408E5 /* Persistence.swift */,
+				6F891F7B29A235C800B408E5 /* SExpenseStore.swift */,
+				6F891F7929A2356C00B408E5 /* SExpense.swift */,
 				6D3533E629A3CBA0001BF10D /* GoogleService-Info.plist */,
 				6D4DB6AA29A1821B00CA17AE /* ExpenseModel.xcdatamodeld */,
 				6D291C1B299CD7EE00220F66 /* Assets.xcassets */,
 				6D291C1D299CD7EE00220F66 /* Preview Content */,
-				6F891F7B29A235C800B408E5 /* SExpenseStore.swift */,
-				6F891F7929A2356C00B408E5 /* SExpense.swift */,
 				6F559DF829A42170009BBE93 /* SCoUser.swift */,
+				6F891F7529A1872400B408E5 /* Persistence.swift */,
+				6DC673B429A179FA00AEC424 /* DataController.swift */,
 			);
 			path = AppGroup1;
 			sourceTree = "<group>";

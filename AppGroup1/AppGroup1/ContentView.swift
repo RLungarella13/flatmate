@@ -10,9 +10,9 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
-    @EnvironmentObject var dataManager: DataManager
+//    @Environment(\.managedObjectContext) private var viewContext
+//    @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
+    @StateObject var dataManager = DataManager()
     @State var expanded = true
     @State private var showingDetails = false
     
@@ -31,14 +31,13 @@ struct ContentView: View {
                         VStack{
                             Spacer().frame(height: 20)
                             DisclosureGroup(isExpanded: $expanded, content: {
-                                
-                                ForEach(allExpenses) {expense  in
+                                ForEach(dataManager.expenses, id: \.id){ expense in
                                     TransactionCell(expense: expense)
+                                    
                                 }
-                                
-                                
-                                
-                                
+//                                ForEach(allExpenses) {expense  in
+//                                    TransactionCell(expense: expense)
+//                                }
                                 Spacer()
                             }, label: {
                                 Text("Transactions")
@@ -124,7 +123,7 @@ struct titleHomeView: View{
             })
             .padding()
             .fullScreenCover(isPresented: $showSearchView){
-                SearchView()
+//                SearchView()
             }
         }
     }
@@ -137,7 +136,7 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 struct TransactionCell: View{
-    @ObservedObject var expense: Expense
+    var expense: SExpense
     
     var body: some View{
         NavigationLink(destination: EditView(expense: expense) ){
@@ -150,18 +149,18 @@ struct TransactionCell: View{
                 Spacer()
                 VStack(alignment: .leading){
                     HStack{
-                        Text(expense.title ?? "")
+                        Text(expense.title )
                             .font(.system(size: 20)).bold()
                         Spacer()
                         Text("Total:")
                     }
                     .foregroundColor(.primary)
                     HStack{
-                        Text(expense.date?.formatted(.dateTime.day().month().year()) ?? "")
+                        Text(expense.date.formatted(.dateTime.day().month().year()) )
                             .foregroundColor(.gray)
                         Spacer()
                         
-                        Text(String(format: "%.2f", expense.total)+"$")
+                        Text(String(format: "%.2f", expense.total)+"€")
                             .foregroundColor(.primary)
                         
                     }

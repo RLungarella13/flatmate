@@ -15,10 +15,12 @@ struct AppGroup1App: App {
     @StateObject var obsUser = ObservableBool()
     
     init(){
+        
         FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
+        
            HomeView()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(dataManager)

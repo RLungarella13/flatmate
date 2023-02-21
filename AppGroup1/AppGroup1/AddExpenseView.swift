@@ -11,13 +11,13 @@ import Combine
 struct AddExpenseView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var dataManager : DataManager
+  //  @Environment(\.managedObjectContext) private var viewContext
+    @StateObject var dataManager = DataManager()
     
     @State var desc : String = ""
     @State var title : String = ""
-    @State var id : String = ""
     @State var total : Float = 0.0
+    
     @State private var selectedDate = Date()
     
     
@@ -77,9 +77,9 @@ struct AddExpenseView: View {
                 Text("Cancel")
             }, trailing: Button(action:{
                 
-                saveNewExpense()
-                
-                dataManager.addExpense(id: id ,title: title, desc: desc, total: total, date: selectedDate)
+//                saveNewExpense()
+                let id = generateUniqueString()
+                dataManager.addExpense(id: id, title: title, desc: desc, total: total, date: selectedDate)
                 dismiss()
                     
                 
@@ -89,28 +89,31 @@ struct AddExpenseView: View {
         }
     }
     
-    func saveNewExpense() {
-        
-        
-        let expense = Expense(context: viewContext)
-        
-        expense.title = title
-        expense.desc = desc
-        expense.total = Float(total)
-        expense.date = selectedDate
-        expense.uID = UUID()
-        
-        do {
-            try viewContext.save()
-            print("user saved")
-        } catch {
-            
-            print(error.localizedDescription)
-            
-        }
-        
+//    func saveNewExpense() {
+//
+//
+//        let expense = Expense(context: viewContext)
+//
+//        expense.title = title
+//        expense.desc = desc
+//        expense.total = Float(total)
+//        expense.date = selectedDate
+//        expense.uID = UUID()
+//
+//        do {
+//            try viewContext.save()
+//            print("user saved")
+//        } catch {
+//
+//            print(error.localizedDescription)
+//
+//        }
+//
+//    }
+    func generateUniqueString() -> String {
+        let uuid = UUID()
+        return uuid.uuidString
     }
-    
     
     
 }

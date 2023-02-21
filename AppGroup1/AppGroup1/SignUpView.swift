@@ -86,7 +86,7 @@ struct SignUpView: View {
     
     
     func register(){
-        print(email)
+        
         Auth.auth().createUser(withEmail: email, password: password){
             result, error in
             if error != nil{

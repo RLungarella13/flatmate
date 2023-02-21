@@ -32,12 +32,7 @@ struct HomeView: View {
                     
                 }
                 VStack(spacing: 30){
-                    ForEach(dataManager.expenses, id: \.id){ expense in
-                        Text(expense.title)
-                            .foregroundColor(.black)
-                            .font(.system(size: 80))
-                        
-                    }
+                    
                     
                     Spacer()
                     // LOG IN
