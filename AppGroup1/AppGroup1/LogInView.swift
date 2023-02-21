@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct LogInView: View {
     
@@ -34,6 +35,7 @@ struct LogInView: View {
                 }
                 .frame(height: 155)
                 Button(action: {
+                    login()
                     //Variable for not showing full screen page
                     logInState.isObserving = false
                 }){
@@ -48,6 +50,14 @@ struct LogInView: View {
                 .shadow(radius: 2)
                 Spacer()
                 
+            }
+        }
+    }
+    
+    func login() {
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if error != nil {
+                print (error!.localizedDescription)
             }
         }
     }

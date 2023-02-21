@@ -42,9 +42,10 @@ class DataManager: ObservableObject{
     }
     
     func addUser (email: String, password: String) {
+        print(email)
         let db = Firestore.firestore()
         let ref = db.collection ("User").document (email)
-        ref.setData(["email": email, "id" : "", "password" : password, "name" : "", "surname" : "", "balance": ""]) { error in
+        ref.setData(["email": email, "id" : 10, "password" : password, "name" : "", "surname" : "", "balance": 0]) { error in
             if let error = error{
                 print(error.localizedDescription)
             }

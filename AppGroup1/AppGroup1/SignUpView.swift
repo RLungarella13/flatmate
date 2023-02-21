@@ -17,7 +17,19 @@ struct SignUpView: View {
     @EnvironmentObject var dataManager : DataManager
     
     @State private var newUser = ""
-    var body: some View {
+    @State private var userIsLoggedIn = false
+    
+    var body: some View{
+        if userIsLoggedIn{
+//            dataManager.addUser(email: email, password: password)
+        }
+        else{
+            content
+        }
+    }
+    var content: some View {
+        
+        
         ZStack{
             Color("BackGround").ignoresSafeArea()
             VStack{
@@ -38,7 +50,8 @@ struct SignUpView: View {
                 .frame(height: 155)
                 Button(action: {
                     //Variable for not showing full screen page
-                    dataManager.addUser(email: email, password: password)
+                    register()
+                    
                     logInState.isObserving = false
                 }){
                     Text("Sign Up")
@@ -54,16 +67,29 @@ struct SignUpView: View {
                 
             }
         }
+        .onAppear{
+            Auth.auth().addStateDidChangeListener{ auth, user in
+                if user != nil{
+                    userIsLoggedIn.toggle()
+                }
+                
+            }
+            
+        }
     }
     
-//    func register(){
-//        Auth.auth().createUser(withEmail: email, password: password){
-//            result, error in
-//            if error != nil{
-//                print(error!.localizedDescription)
-//            }
-//        }
-//    }
+    
+    
+    func register(){
+        print(email)
+        Auth.auth().createUser(withEmail: email, password: password){
+            result, error in
+            if error != nil{
+                print(error!.localizedDescription)
+            }
+        }
+        dataManager.addUser(email: email, password: password)
+    }
 }
 
 struct SignUpView_Previews: PreviewProvider {
