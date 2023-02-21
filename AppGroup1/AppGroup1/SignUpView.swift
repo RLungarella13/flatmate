@@ -13,13 +13,13 @@ struct SignUpView: View {
     @State var email = ""
     @State var password = ""
     
-    @EnvironmentObject var dataManager : DataManager
+    @StateObject var dataManagerCoUser = DataManagerCoUser()
     
     @State private var newUser = ""
     @State private var userIsLoggedIn = false
     @State private var name = ""
     @State private var surname = ""
-    
+    @State private var balance : Float = 0.0
     
     var body: some View {
         
@@ -32,7 +32,7 @@ struct SignUpView: View {
                         TextField("Name", text: $name)
                     }
                     Section(header: Text("SURNAME*")){
-                        TextField("Surname", text: $name)
+                        TextField("Surname", text: $surname)
                     }
                     Section(header: HStack{
                         Text("EMAIL*")
@@ -65,6 +65,8 @@ struct SignUpView: View {
                 Button(action: {
                     //Variable for not showing full screen page
                     register()
+                    let id = generateUniqueString()
+                    dataManagerCoUser.addCoUser(id: id, name: name, surname: surname,balance: balance, email: email)
 
                 }){
                     Text("Sign Up")
@@ -93,10 +95,14 @@ struct SignUpView: View {
                 print(error!.localizedDescription)
             }
             else{
-                
+                userIsLoggedIn = true
             }
         }
-//        dataManager.addUser(email: email, password: password)
+        
+    }
+    func generateUniqueString() -> String {
+        let uuid = UUID()
+        return uuid.uuidString
     }
 }
 

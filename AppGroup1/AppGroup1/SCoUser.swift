@@ -13,5 +13,4 @@ struct SCoUser: Identifiable{
     var surname : String
     var balance : Float
     var email : String
-    var password : String
 }

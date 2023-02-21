@@ -123,7 +123,7 @@ struct titleHomeView: View{
             })
             .padding()
             .fullScreenCover(isPresented: $showSearchView){
-//                SearchView()
+                SearchView()
             }
         }
     }
