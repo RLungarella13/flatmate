@@ -49,6 +49,7 @@ struct PersistenceController {
             newExpense.uID = UUID()
             
         }
+        let newBalance = Balance(context: viewContext)
         
         do {
             try viewContext.save()

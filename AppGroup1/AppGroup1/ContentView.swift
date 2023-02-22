@@ -6,15 +6,17 @@
 //m
 
 import SwiftUI
-
+import Firebase
 
 
 struct ContentView: View {
-//    @Environment(\.managedObjectContext) private var viewContext
-//    @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
+    //    @Environment(\.managedObjectContext) private var viewContext
+    //    @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
     @StateObject var dataManager = DataManager()
     @State var expanded = true
     @State private var showingDetails = false
+    @StateObject var dataManagerUser = DataManagerUser()
+    //    @State var viewBalance = dataManagerUser.user.balance
     
     var body: some View {
         NavigationView{
@@ -34,10 +36,11 @@ struct ContentView: View {
                                 ForEach(dataManager.expenses, id: \.id){ expense in
                                     TransactionCell(expense: expense)
                                     
+                                    
                                 }
-//                                ForEach(allExpenses) {expense  in
-//                                    TransactionCell(expense: expense)
-//                                }
+                                //                                ForEach(allExpenses) {expense  in
+                                //                                    TransactionCell(expense: expense)
+                                //                                }
                                 Spacer()
                             }, label: {
                                 Text("Transactions")
@@ -90,21 +93,42 @@ struct ClickableHStack: View {
 }
 
 struct titleHomeView: View{
+    @State private var titleView = ContentView()
+    @State private var countExpenses: Float = 0
+    
+    @State var balance: Float = 0.0 // Binding per mantenere traccia del valore del campo di testo
     
     let balanceTitle = "Balance"
     var monetarySign = "€"
     let buttonSize: CGFloat = 30
-    @State private var showSearchView = false
     
-    
+    var userBalance: Float = 0.0
+     var db = Firestore.firestore()
+    @State var showSearchView = false
+//    db.collection("User").document("TMvu9tQK3vHiNpM6Hp2a").getDocument { snapshot, error in
+//        if let data = snapshot?.data(), let userBalance = data["balance"] as? Float {
+//            // Aggiorna il valore del binding con il valore recuperato dal database Firebase
+//            userBalance = balance+userBalance
+//            balance = userBalance
+//        }
+//    }
+    @State var printBalance: Float = 0.0
     var body: some View {
-        VStack {
+        
+                VStack {
             CustomNavBar(left: {}, center: {
                 VStack{
-                    Text("00.00")
+                    ForEach(DataManagerUser().users, id: \.id){ user in
+                        
+                         let printBalance = user.balance
+                        
+                    }
+                    Text(String(format: "%.2f", printBalance)+" €")
                         .font(.title)
                         .bold()
-                    
+//                        .onChange(of: countExpenses){newBalance in
+//                            newBalance = userBalance
+//                        }
                     Text(balanceTitle)
                         .font(.headline)
                         .foregroundColor(.gray)

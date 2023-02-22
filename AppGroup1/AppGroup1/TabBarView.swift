@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabBarView: View {
     @EnvironmentObject var dataManager: DataManager
+    @EnvironmentObject var obsUser: ObservableBool
     
     var body: some View {
         
@@ -18,18 +19,21 @@ struct TabBarView: View {
                     Image(systemName: "pin")
                     Text("PinBoard")
                 }
+                .environmentObject(obsUser)
             
             ContentView()
                 .tabItem {
                     Image(systemName: "dollarsign.square")
                     Text("Expenses")
                 }
+                .environmentObject(obsUser)
             
             ProfileView()
                 .tabItem {
                     Image(systemName: "person.crop.square")
                     Text("Account")
             }
+                .environmentObject(obsUser)
             
         }
 //        .fullScreenCover(isPresented: $logInState.isObserving){

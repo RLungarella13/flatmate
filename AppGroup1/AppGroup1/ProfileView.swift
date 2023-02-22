@@ -40,7 +40,7 @@ struct ProfileView: View {
                             Spacer()
                             Button(action:{
                                 logout()
-                                obsUser.isLoggedIn.toggle()
+                                
                             }){
                                 Text("Log out")
                             }
@@ -64,6 +64,7 @@ struct ProfileView: View {
         } catch let error {
             print("Errore durante il logout: \(error.localizedDescription)")
         }
+        obsUser.isLoggedIn = false
         print ("ayooo")
     }
 }

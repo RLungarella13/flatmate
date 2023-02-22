@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 
+
 struct HomeView: View {
     @State var email = ""
     @State var password = ""
@@ -64,15 +65,16 @@ struct HomeView: View {
                 }
                 .padding(70)
             }
-        }.onAppear{
-            Auth.auth().addStateDidChangeListener{ auth, user in
-                if user != nil{
-                    obsUser.isLoggedIn.toggle()
-                }
-                
-            }
-            
         }
+//        .onAppear{
+//            Auth.auth().addStateDidChangeListener{ auth, user in
+//                if user != nil{
+//                    obsUser.isLoggedIn.toggle()
+//                }
+//                
+//            }
+//            
+//        }
     }
 }
 

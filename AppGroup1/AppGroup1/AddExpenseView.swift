@@ -7,19 +7,29 @@
 
 import SwiftUI
 import Combine
+import Firebase
 
 struct AddExpenseView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var obsUser: ObservableBool
   //  @Environment(\.managedObjectContext) private var viewContext
     @StateObject var dataManager = DataManager()
+    @StateObject var dataManagerCoUser = DataManagerCoUser()
+    @StateObject var dataManagerUser = DataManagerUser()
+    
+    var itemCount = 0
+    
+    @State private var balance: Float = 0.0
     
     @State var desc : String = ""
     @State var title : String = ""
     @State var total : Float = 0.0
     
     @State private var selectedDate = Date()
-    
+    @State var isPersonal: Bool = true
+    @State var isIncome: Bool = false
+//    @Binding private var countExpenses: Int
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -67,6 +77,24 @@ struct AddExpenseView: View {
                     
                 }
                 
+                Section(header: Text("For who?")) {
+                    Button("Personal"){
+                        isPersonal = true
+                    }
+                    Button("Group"){
+                        isPersonal = false
+                    }
+                }
+                
+                Section(header: Text("Transaction")) {
+                    Button("Expense"){
+                        isIncome = false
+                    }
+                    Button("Income"){
+                        isIncome = true
+                    }
+                    
+                }
             }
             .navigationTitle("New Expense")
             .navigationBarItems(leading: Button(action:{
@@ -78,8 +106,16 @@ struct AddExpenseView: View {
             }, trailing: Button(action:{
                 
 //                saveNewExpense()
-                let id = generateUniqueString()
-                dataManager.addExpense(id: id, title: title, desc: desc, total: total, date: selectedDate)
+                if isPersonal{
+                    let id = generateUniqueString()
+                    dataManager.addExpense(id: id, title: title, desc: desc, total: total, date: selectedDate)
+                    if isIncome{
+                        
+                        dataManagerUser.addUser(id: "TMvu9tQK3vHiNpM6Hp2a", balance: total)
+                        
+                    }
+                }
+//                countExpenses = total
                 dismiss()
                     
                 
@@ -87,6 +123,7 @@ struct AddExpenseView: View {
                 Text("Save")
             }.disabled(title == "" || total == 0))
         }
+        
     }
     
 //    func saveNewExpense() {
@@ -115,15 +152,20 @@ struct AddExpenseView: View {
         return uuid.uuidString
     }
     
+//    func observeItemCount() {
+//        database.child("items").observe(.value) { snapshot in
+//          itemCount = snapshot.childrenCount
+//        }
+//      }
     
 }
 
 
-struct AddExpenseView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddExpenseView()
-    }
-}
+//struct AddExpenseView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddExpenseView()
+//    }
+//}
 
 struct CurrencyTextField: View {
     @Binding var value: Float

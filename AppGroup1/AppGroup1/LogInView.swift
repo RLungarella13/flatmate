@@ -69,6 +69,7 @@ struct LogInView: View {
             if error != nil {
                 print (error!.localizedDescription)
             }
+            obsUser.isLoggedIn = true
         }
     }
 }
