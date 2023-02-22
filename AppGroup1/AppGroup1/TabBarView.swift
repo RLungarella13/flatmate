@@ -14,7 +14,7 @@ struct TabBarView: View {
     var body: some View {
         
         TabView{
-            ListsView()
+            PinBoardView()
                 .tabItem {
                     Image(systemName: "pin")
                     Text("PinBoard")

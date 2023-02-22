@@ -15,7 +15,7 @@ struct ContentView: View {
     @StateObject var dataManager = DataManager()
     @State var expanded = true
     @State private var showingDetails = false
-    @StateObject var dataManagerUser = DataManagerUser()
+    @EnvironmentObject var dataManagerUser: DataManager
     //    @State var viewBalance = dataManagerUser.user.balance
     
     var body: some View {
@@ -118,12 +118,7 @@ struct titleHomeView: View{
                 VStack {
             CustomNavBar(left: {}, center: {
                 VStack{
-                    ForEach(DataManagerUser().users, id: \.id){ user in
-                        
-                         let printBalance = user.balance
-                        
-                    }
-                    Text(String(format: "%.2f", printBalance)+" €")
+                    Text(String(format: "%.2f", )+" €")
                         .font(.title)
                         .bold()
 //                        .onChange(of: countExpenses){newBalance in
