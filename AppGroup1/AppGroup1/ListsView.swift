@@ -35,7 +35,7 @@ struct ListsView: View {
                 VStack {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) {
-                            ForEach(notes) { note in
+                            ForEach(notes) { note in 
                                 Button(action: {
                                     if isEditing {
                                         if selectedNotes.contains(note) {

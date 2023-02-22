@@ -32,8 +32,6 @@ struct HomeView: View {
                     
                 }
                 VStack(spacing: 30){
-                    
-                    
                     Spacer()
                     // LOG IN
                     NavigationLink(destination: LogInView()){

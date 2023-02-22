@@ -11,6 +11,7 @@ import Firebase
 struct ProfileView: View {
 
     @EnvironmentObject var obsUser: ObservableBool
+    @EnvironmentObject var dataManager: DataManager
     
     var body: some View {
         NavigationView{
@@ -63,6 +64,7 @@ struct ProfileView: View {
         } catch let error {
             print("Errore durante il logout: \(error.localizedDescription)")
         }
+        print ("ayooo")
     }
 }
 

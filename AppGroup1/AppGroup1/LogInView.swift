@@ -13,6 +13,8 @@ struct LogInView: View {
     @State var email = ""
     @State var password = ""
     
+    @EnvironmentObject var obsUser: ObservableBool
+    
     var body: some View {
         ZStack{
             Color("BackGround").ignoresSafeArea()
@@ -66,8 +68,6 @@ struct LogInView: View {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil {
                 print (error!.localizedDescription)
-            }else{
-                
             }
         }
     }

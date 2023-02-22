@@ -14,6 +14,7 @@ struct SignUpView: View {
     @State var password = ""
     
     @StateObject var dataManagerCoUser = DataManagerCoUser()
+    @EnvironmentObject var obsUser: ObservableBool
     
     @State private var newUser = ""
     @State private var userIsLoggedIn = false
@@ -94,9 +95,7 @@ struct SignUpView: View {
             if error != nil{
                 print(error!.localizedDescription)
             }
-            else{
-                userIsLoggedIn = true
-            }
+            
         }
         
     }

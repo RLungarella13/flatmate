@@ -13,24 +13,22 @@ struct TabBarView: View {
     var body: some View {
         
         TabView{
+            ListsView()
+                .tabItem {
+                    Image(systemName: "pin")
+                    Text("PinBoard")
+                }
+            
             ContentView()
                 .tabItem {
                     Image(systemName: "dollarsign.square")
                     Text("Expenses")
                 }
             
-            ListsView()
-                .tabItem {
-                    Image(systemName: "square.and.pencil")
-                    Text("Notes")
-                }
-            
             ProfileView()
                 .tabItem {
                     Image(systemName: "person.crop.square")
                     Text("Account")
-                        
-                    
             }
             
         }
