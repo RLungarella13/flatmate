@@ -15,7 +15,7 @@ struct ContentView: View {
     @StateObject var dataManager = DataManager()
     @State var expanded = true
     @State private var showingDetails = false
-    @EnvironmentObject var dataManagerUser: DataManager
+    @EnvironmentObject var dataManagerUser: DataManagerUser
     //    @State var viewBalance = dataManagerUser.user.balance
     
     var body: some View {
@@ -105,6 +105,7 @@ struct titleHomeView: View{
     var userBalance: Float = 0.0
      var db = Firestore.firestore()
     @State var showSearchView = false
+    @EnvironmentObject var dataManagerUser: DataManagerUser
 //    db.collection("User").document("TMvu9tQK3vHiNpM6Hp2a").getDocument { snapshot, error in
 //        if let data = snapshot?.data(), let userBalance = data["balance"] as? Float {
 //            // Aggiorna il valore del binding con il valore recuperato dal database Firebase
@@ -118,7 +119,7 @@ struct titleHomeView: View{
                 VStack {
             CustomNavBar(left: {}, center: {
                 VStack{
-                    Text(String(format: "%.2f", )+" €")
+                    Text(String(format: "%.2f", dataManagerUser.user.balance )+" €")
                         .font(.title)
                         .bold()
 //                        .onChange(of: countExpenses){newBalance in

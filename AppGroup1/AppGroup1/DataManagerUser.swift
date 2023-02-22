@@ -10,7 +10,7 @@ import Firebase
 
 class DataManagerUser: ObservableObject{
     @Published var users : [SUser] = []
-    @State var user : SUser = SUser(id: "TMvu9tQK3vHiNpM6Hp2a",balance: 0.0)
+    @Published var user : SUser = SUser(id: "TMvu9tQK3vHiNpM6Hp2a",balance: 0.0)
     
     init (){
         fetchCoUsers()

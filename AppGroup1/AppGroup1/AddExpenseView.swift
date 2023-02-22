@@ -16,7 +16,7 @@ struct AddExpenseView: View {
   //  @Environment(\.managedObjectContext) private var viewContext
     @StateObject var dataManager = DataManager()
     @StateObject var dataManagerCoUser = DataManagerCoUser()
-    @StateObject var dataManagerUser = DataManagerUser()
+    @EnvironmentObject var dataManagerUser: DataManagerUser
     
     var itemCount = 0
     
@@ -116,6 +116,7 @@ struct AddExpenseView: View {
                     }
                 }
 //                countExpenses = total
+                dataManagerUser.user.balance += total
                 dismiss()
                     
                 

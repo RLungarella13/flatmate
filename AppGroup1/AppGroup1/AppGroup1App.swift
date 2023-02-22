@@ -13,6 +13,7 @@ struct AppGroup1App: App {
     @StateObject private var dataController = DataController()
     @StateObject var dataManager = DataManager()
     @StateObject var obsUser = ObservableBool()
+    @StateObject var dataManagerUser = DataManagerUser()
     let persistenceController = PersistenceController.shared
     
     init()
@@ -34,7 +35,7 @@ struct AppGroup1App: App {
                 .environmentObject(dataManager)
                 .environmentObject(obsUser)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            
+                .environmentObject(dataManagerUser)
 //           HomeView()
 //                .environment(\.managedObjectContext, dataController.container.viewContext)
 //                .environmentObject(dataManager)
