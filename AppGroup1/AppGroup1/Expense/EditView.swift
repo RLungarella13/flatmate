@@ -17,13 +17,13 @@ struct EditView: View {
     @State private var showDisclaimer = false
     @State private var acceptedDisclaimer = false
     var expense: SExpense
-    @StateObject var dataManager = DataManager()
+    @EnvironmentObject var dataManager: DataManager
     
     @State var desc : String
     @State var title : String
     @State var total: Float
     @State private var selectedDate = Date()
-
+    @EnvironmentObject var dataManagerUser: DataManagerUser
     init ( expense : SExpense) {
             self.expense = expense
 
@@ -54,6 +54,7 @@ struct EditView: View {
                     HStack{
                         Image(systemName: "eurosign")
                         CurrencyTextField(value: $total)
+                            
                     }
                 }
                 
@@ -71,7 +72,6 @@ struct EditView: View {
             }
             .navigationBarTitle("Edit Expense", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") { saveNewExpense(title: title, desc: desc, total: total, date: selectedDate)}.disabled(title == "" || total == 0))
-            
             .navigationBarItems(trailing: Button("Delete"){
                 acceptedDisclaimer = true
             })

@@ -12,10 +12,11 @@ import Firebase
 struct ContentView: View {
     //    @Environment(\.managedObjectContext) private var viewContext
     //    @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
-    @StateObject var dataManager = DataManager()
+    
     @State var expanded = true
     @State private var showingDetails = false
     @EnvironmentObject var dataManagerUser: DataManagerUser
+    @EnvironmentObject var dataManager: DataManager
     //    @State var viewBalance = dataManagerUser.user.balance
     
     var body: some View {
@@ -35,12 +36,9 @@ struct ContentView: View {
                             DisclosureGroup(isExpanded: $expanded, content: {
                                 ForEach(dataManager.expenses, id: \.id){ expense in
                                     TransactionCell(expense: expense)
-                                    
-                                    
+                                        .environmentObject(dataManagerUser)
+                                        .environmentObject(dataManager)
                                 }
-                                //                                ForEach(allExpenses) {expense  in
-                                //                                    TransactionCell(expense: expense)
-                                //                                }
                                 Spacer()
                             }, label: {
                                 Text("Transactions")
@@ -95,9 +93,8 @@ struct ClickableHStack: View {
 struct titleHomeView: View{
     @State private var titleView = ContentView()
     @State private var countExpenses: Float = 0
-    
     @State var balance: Float = 0.0 // Binding per mantenere traccia del valore del campo di testo
-    
+
     let balanceTitle = "Balance"
     var monetarySign = "€"
     let buttonSize: CGFloat = 30
@@ -106,6 +103,7 @@ struct titleHomeView: View{
      var db = Firestore.firestore()
     @State var showSearchView = false
     @EnvironmentObject var dataManagerUser: DataManagerUser
+    @EnvironmentObject var dataManagerExpenses: DataManager
 //    db.collection("User").document("TMvu9tQK3vHiNpM6Hp2a").getDocument { snapshot, error in
 //        if let data = snapshot?.data(), let userBalance = data["balance"] as? Float {
 //            // Aggiorna il valore del binding con il valore recuperato dal database Firebase
@@ -122,9 +120,13 @@ struct titleHomeView: View{
                     Text(String(format: "%.2f", dataManagerUser.user.balance  )+" €")
                         .font(.title)
                         .bold()
-//                        .onChange(of: countExpenses){newBalance in
-//                            newBalance = userBalance
-//                        }
+                        .onChange(of: dataManagerExpenses.expenses.count){ newBalance in
+                            var userTotalBalance: Float = 0
+                            dataManagerExpenses.expenses.forEach{ userExpense in
+                                userTotalBalance = userTotalBalance + userExpense.total
+                            }
+                            dataManagerUser.user.balance = userTotalBalance
+                        }
                     Text(balanceTitle)
                         .font(.headline)
                         .foregroundColor(.gray)
@@ -157,9 +159,10 @@ struct ContentView_Previews: PreviewProvider {
 
 struct TransactionCell: View{
     var expense: SExpense
-    
+    @EnvironmentObject var dataManagerUser: DataManagerUser
+    @EnvironmentObject var dataManager: DataManager
     var body: some View{
-        NavigationLink(destination: EditView(expense: expense) ){
+        NavigationLink(destination: EditView(expense: expense)){
             HStack{
                 Spacer()
                 Image(systemName: "cart")
@@ -169,7 +172,7 @@ struct TransactionCell: View{
                 Spacer()
                 VStack(alignment: .leading){
                     HStack{
-                        Text(expense.title )
+                        Text(expense.title)
                             .font(.system(size: 20)).bold()
                         Spacer()
                         Text("Total:")
@@ -182,6 +185,14 @@ struct TransactionCell: View{
                         
                         Text(String(format: "%.2f", expense.total)+"€")
                             .foregroundColor(.primary)
+                            .onChange(of: expense.total){
+                                newBalance in
+                                    var userTotalBalance: Float = 0
+                                    dataManager.expenses.forEach{ userExpense in
+                                        userTotalBalance = userTotalBalance + userExpense.total
+                                    }
+                                    dataManagerUser.user.balance = userTotalBalance
+                            }
                         
                     }
                 }.padding()
