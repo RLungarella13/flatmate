@@ -93,7 +93,6 @@ struct AddExpenseView: View {
                     Button("Income"){
                         isIncome = true
                     }
-                    
                 }
             }
             .navigationTitle("New Expense")
