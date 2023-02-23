@@ -14,7 +14,8 @@ struct LogInView: View {
     @State var password = ""
     
     @EnvironmentObject var obsUser: ObservableBool
-    
+    @EnvironmentObject var userLog: ObservableUser
+    @StateObject var dataManagerCoUser = DataManagerCoUser()
     var body: some View {
         ZStack{
             Color("BackGround").ignoresSafeArea()
@@ -46,6 +47,16 @@ struct LogInView: View {
                 }
                 Button(action: {
                     login()
+                    dataManagerCoUser.coUsers.forEach{ user in
+                        if user.email == email {
+                            userLog.email = email
+                            userLog.id = user.id
+                            userLog.name = user.name
+                            userLog.surname = user.surname
+                        }
+                        
+                        
+                    }
                 }){
                     Text("Log In")
                         .foregroundColor(.white)
@@ -61,6 +72,7 @@ struct LogInView: View {
             }
         }
         
+        
 
     }
     
@@ -68,8 +80,10 @@ struct LogInView: View {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil {
                 print (error!.localizedDescription)
+            }else{
+                obsUser.isLoggedIn = true
             }
-            obsUser.isLoggedIn = true
+            userLog.email = email
         }
     }
 }
@@ -79,3 +93,4 @@ struct LogInView_Previews: PreviewProvider {
         LogInView()
     }
 }
+

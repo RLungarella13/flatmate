@@ -14,6 +14,8 @@ struct AppGroup1App: App {
     @StateObject var dataManager = DataManager()
     @StateObject var obsUser = ObservableBool()
     @StateObject var dataManagerUser = DataManagerUser()
+    @StateObject var userLog = ObservableUser()
+//    @Published var couser = SCoUser(id: "", name: "", surname: "", balance: 0.0, email: "")
     let persistenceController = PersistenceController.shared
     
     init()
@@ -38,6 +40,8 @@ struct AppGroup1App: App {
                 .environmentObject(obsUser)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(dataManagerUser)
+                .environmentObject(userLog)
+                
 //           HomeView()
 //                .environment(\.managedObjectContext, dataController.container.viewContext)
 //                .environmentObject(dataManager)
@@ -48,6 +52,13 @@ struct AppGroup1App: App {
 
 class ObservableBool: ObservableObject{
     @Published var isLoggedIn = false
+}
+
+class ObservableUser: ObservableObject{
+    @Published var id : String = ""
+    @Published var name = ""
+    @Published var surname = ""
+    @Published var email = ""
 }
 
 //import SwiftUI

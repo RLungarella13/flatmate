@@ -14,10 +14,12 @@ struct HomeView: View {
     @State var password = ""
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var obsUser: ObservableBool
+    @State var userLog = ObservableUser()
     
     var body: some View{
         if obsUser.isLoggedIn{
             TabBarView()
+                .environmentObject(userLog)
         }else{
             content
         }
@@ -98,3 +100,5 @@ struct AdaptiveImage: View {
         }
     }
 }
+
+

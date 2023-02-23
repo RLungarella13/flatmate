@@ -119,7 +119,7 @@ struct titleHomeView: View{
                 VStack {
             CustomNavBar(left: {}, center: {
                 VStack{
-                    Text(String(format: "%.2f", dataManagerUser.user.balance )+" €")
+                    Text(String(format: "%.2f", dataManagerUser.user.balance  )+" €")
                         .font(.title)
                         .bold()
 //                        .onChange(of: countExpenses){newBalance in

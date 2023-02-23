@@ -10,11 +10,12 @@ import SwiftUI
 struct TabBarView: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var obsUser: ObservableBool
-    
+    @EnvironmentObject var userLog: ObservableUser
     var body: some View {
         
         TabView{
             PinBoardView()
+                
                 .tabItem {
                     Image(systemName: "pin")
                     Text("PinBoard")
@@ -29,6 +30,7 @@ struct TabBarView: View {
                 .environmentObject(obsUser)
             
             ProfileView()
+                
                 .tabItem {
                     Image(systemName: "person.crop.square")
                     Text("Account")

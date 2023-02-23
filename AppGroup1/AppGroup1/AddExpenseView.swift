@@ -73,8 +73,7 @@ struct AddExpenseView: View {
                         in: ...Date(),
                         displayedComponents: [.date]
                     )
-                                
-                    
+                  
                 }
                 
                 Section(header: Text("For who?")) {
@@ -111,7 +110,7 @@ struct AddExpenseView: View {
                     if isIncome{
                         
                        dataManagerUser.addUser(id: "TMvu9tQK3vHiNpM6Hp2a", balance: total)
-                        
+                        dataManager.fetchExpenses()
                     }
                 }
 //                countExpenses = total

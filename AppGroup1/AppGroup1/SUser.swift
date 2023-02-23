@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SUser: Identifiable{
+struct SUser: Identifiable, Codable{
     var id: String
     var balance: Float
 }

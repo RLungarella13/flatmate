@@ -11,16 +11,18 @@ import Firebase
 struct ProfileView: View {
 
     @EnvironmentObject var obsUser: ObservableBool
-    @EnvironmentObject var dataManager: DataManager
-    
+    @StateObject var dataManagerCoUser = DataManagerCoUser()
+    @EnvironmentObject var userLog: ObservableUser
     var body: some View {
         if obsUser.isLoggedIn{
             content
+                .environmentObject(userLog)
         }else{
             HomeView()
         }
     }
     var content: some View {
+        
         NavigationView{
             ZStack{
                 Color("BackGround").ignoresSafeArea()
@@ -31,16 +33,17 @@ struct ProfileView: View {
                             .bold()
                             .foregroundColor(.gray)
                         accountSettings()
-                        Text("Preferences")
-                            .font(.system(size: 16))
-                            .bold()
-                            .foregroundColor(.gray)
-                        preferencesSettings()
-                        Text("Feedback")
-                            .font(.system(size: 16))
-                            .bold()
-                            .foregroundColor(.gray)
-                        feedbackSettings()
+                            .environmentObject(userLog)
+//                        Text("Preferences")
+//                            .font(.system(size: 16))
+//                            .bold()
+//                            .foregroundColor(.gray)
+//                        preferencesSettings()
+//                        Text("Feedback")
+//                            .font(.system(size: 16))
+//                            .bold()
+//                            .foregroundColor(.gray)
+//                        feedbackSettings()
                         Divider()
                         Spacer()
                         HStack{
@@ -76,7 +79,11 @@ struct ProfileView: View {
 }
 
 struct accountSettings: View{
+    
+    @State var dataManagerCoUser = DataManagerCoUser()
+    @EnvironmentObject var userLog : ObservableUser
     var body: some View{
+        
         Button(action:{
             
         }){
@@ -93,12 +100,12 @@ struct accountSettings: View{
                 }
                 
                 VStack(alignment: .leading, spacing: 5){
-                    Text("Raffaele Lungarella")
+                    Text(userLog.name+" "+userLog.surname)
                         .font(.system(size: 22))
                         .bold()
                         .foregroundColor(.primary)
                     
-                    Text("goxgwadu@telegmail.com")
+                    Text(userLog.email)
                         .font(.system(size: 14))
                     
                 }
@@ -168,3 +175,4 @@ struct ProfileView_Previews: PreviewProvider {
         ProfileView()
     }
 }
+

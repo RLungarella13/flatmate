@@ -15,6 +15,7 @@ struct SignUpView: View {
     
     @StateObject var dataManagerCoUser = DataManagerCoUser()
     @EnvironmentObject var obsUser: ObservableBool
+    @EnvironmentObject var userLog: ObservableUser
     
     @State private var newUser = ""
     @State private var userIsLoggedIn = false
@@ -68,6 +69,10 @@ struct SignUpView: View {
                     register()
                     let id = generateUniqueString()
                     dataManagerCoUser.addCoUser(id: id, name: name, surname: surname,balance: balance, email: email)
+                    userLog.id = id
+                    userLog.name = name
+                    userLog.surname = surname
+                    userLog.email = email
 
                 }){
                     Text("Sign Up")
@@ -95,7 +100,7 @@ struct SignUpView: View {
             if error != nil{
                 print(error!.localizedDescription)
             }
-            obsUser.isLoggedIn = true
+            else{obsUser.isLoggedIn = true}
         }
         
     }
