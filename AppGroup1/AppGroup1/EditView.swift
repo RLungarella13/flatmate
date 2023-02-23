@@ -11,8 +11,8 @@ import Firebase
 struct EditView: View {
     
     @Environment(\.dismiss) private var dismiss
-//  @Environment(\.managedObjectContext) private var viewContext
-//  @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest<Expense>(entity: Expense.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Expense.date, ascending: false)]) var allExpenses : FetchedResults<Expense>
   
     @State private var showDisclaimer = false
     @State private var acceptedDisclaimer = false
@@ -84,6 +84,9 @@ struct EditView: View {
     }
     
     func saveNewExpense(title: String, desc: String, total: Float, date: Date) {
+        
+         
+        
         let db = Firestore.firestore()
         
         db.collection("Expense").document(expense.id).getDocument { (document, error) in

@@ -6,40 +6,41 @@
 //
 
 import SwiftUI
-
-struct Note: Identifiable, Hashable {
-    let id = UUID()
-    var title: String
-    var content: String
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func ==(lhs: Note, rhs: Note) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
+import Firebase
+//struct Note: Identifiable, Hashable {
+//    let id : String
+//    var title: String
+//    var content: String
+//
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//    }
+//
+//    static func ==(lhs: Note, rhs: Note) -> Bool {
+//        return lhs.id == rhs.id
+//    }
+//}
 
 struct PinBoardView: View {
-    @State var notes = [Note]()
+    @State var notes = [SNote]()
     @State var isAddingNote = false
-    @State var selectedNote: Note?
+    @State var selectedNote: SNote?
     @State var isEditing = false
-    @State var selectedNotes: Set<Note> = []
+    @State var selectedNotes: Set<SNote> = []
+    @StateObject var dataManagerNote = DataManagerNote()
     var creationDate = Date()
     
     var body: some View {
-
+        
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 Color("BackGround").ignoresSafeArea()
                 VStack {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: -10)], spacing: 30) {
-                            ForEach(notes) { note in
+                            ForEach(dataManagerNote.notes, id: \.id) { note in
                                 VStack{
-                                    Button(action: {
+                                    Button(action: { 
                                         if isEditing {
                                             if selectedNotes.contains(note) {
                                                 selectedNotes.remove(note)
@@ -66,7 +67,7 @@ struct PinBoardView: View {
                                     Text(note.title)
                                         .font(.headline)
                                         .foregroundColor(.primary)
-                                        
+                                    
                                     Text("\(creationDate.formatted(.dateTime.day().month().year()))")
                                         .foregroundColor(.gray)
                                         .font(.system(size: 16))
@@ -135,12 +136,12 @@ struct PinBoardView: View {
 
 
 struct CreateNoteView: View {
-    @Binding var notes: [Note]
+    @Binding var notes: [SNote]
     @Binding var isPresented: Bool
     @State var noteTitle: String
     @State var noteContent: String
-    @Binding var selectedNote: Note?
-    
+    @Binding var selectedNote: SNote?
+    @StateObject var dataManagerNote = DataManagerNote()
     @State var hasBulletPoint = false
     
     var body: some View {
@@ -159,7 +160,7 @@ struct CreateNoteView: View {
                             
                         }
                     }
-                   
+                
                     .onAppear {
                         if selectedNote != nil {
                             noteTitle = selectedNote!.title
@@ -170,39 +171,62 @@ struct CreateNoteView: View {
             }
             .padding()
             .toolbar {
-                            ToolbarItem(placement: .keyboard) {
-                                HStack {
-                                    Button(action: {
-                                        hasBulletPoint.toggle()
-                                    }) {
-                                        Image(systemName: "checklist.unchecked")
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                }
-                                .padding(.horizontal)
-                                
-                            }
+                ToolbarItem(placement: .keyboard) {
+                    HStack {
+                        Button(action: {
+                            hasBulletPoint.toggle()
+                        }) {
+                            Image(systemName: "checklist.unchecked")
                         }
+                        
+                        Spacer()
+                        
+                    }
+                    .padding(.horizontal)
+                    
+                }
+            }
             .navigationBarTitle(selectedNote != nil ? "Edit Note" : "New Note", displayMode: .inline)
             .navigationBarItems(
                 leading: Button("Cancel") {
                     isPresented = false
                 },
                 trailing: Button("Done") {
+                    
                     if selectedNote != nil {
                         let index = notes.firstIndex(where: { $0.id == selectedNote!.id })!
                         notes[index].title = noteTitle
                         notes[index].content = noteContent
+                        let db = Firestore.firestore()
+                        
+                        db.collection("Note").document(notes[index].id).getDocument { (document, error) in
+                            if let document = document, document.exists {
+                                db.collection("Note").document(notes[index].id).setData([
+                                    "id": notes[index].id,
+                                    "title": noteTitle,
+                                    "content": noteContent,
+                                    
+                                ])
+                            }
+                            else{
+                                print("ERRORE \(notes[index].id) \(db.collection("Note").document(notes[index].id).documentID)")
+                            }
+                            
+                        }
                     } else {
-                        notes.append(Note(title: noteTitle, content: noteContent))
+                        let id = generateUniqueString()
+                        dataManagerNote.addNote(id: id, title: noteTitle, content: noteContent)
+                        notes.append(SNote(id: id,title: noteTitle, content: noteContent))
                     }
                     isPresented = false
                 }.disabled(noteTitle == "")
             )
         }
         
+    }
+    func generateUniqueString() -> String {
+        let uuid = UUID()
+        return uuid.uuidString
     }
 }
 

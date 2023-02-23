@@ -14,6 +14,13 @@ struct ProfileView: View {
     @EnvironmentObject var dataManager: DataManager
     
     var body: some View {
+        if obsUser.isLoggedIn{
+            content
+        }else{
+            HomeView()
+        }
+    }
+    var content: some View {
         NavigationView{
             ZStack{
                 Color("BackGround").ignoresSafeArea()
@@ -65,7 +72,6 @@ struct ProfileView: View {
             print("Errore durante il logout: \(error.localizedDescription)")
         }
         obsUser.isLoggedIn = false
-        print ("ayooo")
     }
 }
 

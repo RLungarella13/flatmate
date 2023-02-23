@@ -46,8 +46,6 @@ struct PersistenceController {
             newExpense.title = "newEmpty"
             newExpense.desc = "newEmpty"
             newExpense.total = 0.0
-            newExpense.uID = UUID()
-            
         }
         let newBalance = Balance(context: viewContext)
         
