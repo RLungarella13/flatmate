@@ -90,19 +90,19 @@ struct accountSettings: View{
     @EnvironmentObject var userLog : ObservableUser
     var body: some View{
         
-        Button(action:{
-            
-        }){
+//        Button(action:{
+//
+//        }){
             HStack{
                 ZStack(alignment: .bottomTrailing){
                     Image(systemName: "person.crop.circle.fill")
                         .foregroundColor(.primary)
                         .font(.system(size: 60))
-                    Button(action: {}){
-                        Image(systemName: "camera.fill")
-                        
-                        
-                    }
+//                    Button(action: {}){
+//                        Image(systemName: "camera.fill")
+//
+//
+//                    }
                 }
                 
                 VStack(alignment: .leading, spacing: 5){
@@ -116,9 +116,9 @@ struct accountSettings: View{
                     
                 }
                 Spacer()
-                Image(systemName: "chevron.right")
+//                Image(systemName: "chevron.right")
             }
-        }
+//        }
     }
 }
 
