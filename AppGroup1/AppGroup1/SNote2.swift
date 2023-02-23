@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SNote: Identifiable, Hashable{
+struct SNote2: Identifiable, Hashable{
     var id: String
     var title: String
     var content: String
@@ -17,7 +17,7 @@ struct SNote: Identifiable, Hashable{
         hasher.combine(id)
     }
     
-    static func ==(lhs: SNote, rhs: SNote) -> Bool {
+    static func ==(lhs: SNote2, rhs: SNote2) -> Bool {
         return lhs.id == rhs.id
     }
 }

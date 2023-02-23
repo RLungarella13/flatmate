@@ -36,7 +36,7 @@
 		6F985B5229A64FE800FA2EC3 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F985B5129A64FE800FA2EC3 /* Balance.swift */; };
 		6F985B5429A65A3A00FA2EC3 /* SUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F985B5329A65A3A00FA2EC3 /* SUser.swift */; };
 		6F985B5629A65B5500FA2EC3 /* DataManagerUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F985B5529A65B5500FA2EC3 /* DataManagerUser.swift */; };
-		6F985B5829A6A4BC00FA2EC3 /* SNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F985B5729A6A4BC00FA2EC3 /* SNote.swift */; };
+		6F985B5829A6A4BC00FA2EC3 /* SNote2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F985B5729A6A4BC00FA2EC3 /* SNote2.swift */; };
 		6F985B5A29A6A51C00FA2EC3 /* DataManagerNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F985B5929A6A51C00FA2EC3 /* DataManagerNote.swift */; };
 		6FB1307829A5793000E6646F /* DataManagerCoUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1307729A5793000E6646F /* DataManagerCoUser.swift */; };
 /* End PBXBuildFile section */
@@ -89,7 +89,7 @@
 		6F985B5129A64FE800FA2EC3 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		6F985B5329A65A3A00FA2EC3 /* SUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUser.swift; sourceTree = "<group>"; };
 		6F985B5529A65B5500FA2EC3 /* DataManagerUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerUser.swift; sourceTree = "<group>"; };
-		6F985B5729A6A4BC00FA2EC3 /* SNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNote.swift; sourceTree = "<group>"; };
+		6F985B5729A6A4BC00FA2EC3 /* SNote2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNote2.swift; sourceTree = "<group>"; };
 		6F985B5929A6A51C00FA2EC3 /* DataManagerNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerNote.swift; sourceTree = "<group>"; };
 		6FB1307729A5793000E6646F /* DataManagerCoUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerCoUser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,7 +161,7 @@
 				6FB1307729A5793000E6646F /* DataManagerCoUser.swift */,
 				6F985B5329A65A3A00FA2EC3 /* SUser.swift */,
 				6F985B5529A65B5500FA2EC3 /* DataManagerUser.swift */,
-				6F985B5729A6A4BC00FA2EC3 /* SNote.swift */,
+				6F985B5729A6A4BC00FA2EC3 /* SNote2.swift */,
 				6F985B5929A6A51C00FA2EC3 /* DataManagerNote.swift */,
 				6F891F7B29A235C800B408E5 /* SExpenseStore.swift */,
 				6D3533E629A3CBA0001BF10D /* GoogleService-Info.plist */,
@@ -342,7 +342,7 @@
 				6F985B5429A65A3A00FA2EC3 /* SUser.swift in Sources */,
 				6D2518D729A3DEC400D4AE53 /* LogInView.swift in Sources */,
 				6F985B5A29A6A51C00FA2EC3 /* DataManagerNote.swift in Sources */,
-				6F985B5829A6A4BC00FA2EC3 /* SNote.swift in Sources */,
+				6F985B5829A6A4BC00FA2EC3 /* SNote2.swift in Sources */,
 				6F891F7A29A2356C00B408E5 /* SExpense.swift in Sources */,
 				6F985B5629A65B5500FA2EC3 /* DataManagerUser.swift in Sources */,
 				6F891F7829A222DC00B408E5 /* AddExpenseView.swift in Sources */,

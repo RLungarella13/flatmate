@@ -34,7 +34,7 @@ class DataManagerNote: ObservableObject{
                     let content = data["content"] as? String ?? ""
                     
                     
-                    let note = SNote( id: id, title: title, content: content, date: Date())
+                    let note = SNote( id: id, title: title, content: content)
                     
                     switch change.type {
                     case .added:

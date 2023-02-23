@@ -7,19 +7,19 @@
 
 import SwiftUI
 import Firebase
-//struct Note: Identifiable, Hashable {
-//    let id : String
-//    var title: String
-//    var content: String
-//
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(id)
-//    }
-//
-//    static func ==(lhs: Note, rhs: Note) -> Bool {
-//        return lhs.id == rhs.id
-//    }
-//}
+struct SNote: Identifiable, Hashable {
+    let id : String
+    var title: String
+    var content: String
+    var date = Date()
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    static func ==(lhs: SNote, rhs: SNote) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
 
 struct PinBoardView: View {
     @State var notes = [SNote]()
@@ -43,9 +43,9 @@ struct PinBoardView: View {
                                     Button(action: { 
                                         if isEditing {
                                             if selectedNotes.contains(note) {
-                                                selectedNotes.remove(note)
+                                                dataManagerNote.notes.de
                                             } else {
-                                                selectedNotes.insert(note)
+                                                dataManagerNote.addNote(id: note.id, title: note.title, content: note.content)
                                             }
                                         } else {
                                             selectedNote = note
@@ -121,12 +121,25 @@ struct PinBoardView: View {
                             selectedNotes.removeAll()
                         }) {
                             Text(isEditing ? "Done" : "Edit")
-                        }.disabled(notes.isEmpty)
+                        }.disabled(dataManagerNote.notes.isEmpty)
                     }
             )
             .fullScreenCover(isPresented: $isAddingNote) {
                 CreateNoteView(notes: $notes, isPresented: $isAddingNote, noteTitle: "", noteContent: "", selectedNote: $selectedNote)
             }
+        }
+    }
+    func removeNote() {
+        let db = Firestore.firestore()
+        
+        db.collection("Note").document(selectedNote.id).getDocument { (document, error) in
+            if let document = document, document.exists {
+                db.collection("Note").document(selectedNote.id).delete()
+            }
+            else{
+                print("ERRORE \(selectedNote.id) \(db.collection("Note").document(selectedNote.id).documentID)")
+            }
+            
         }
     }
 }
