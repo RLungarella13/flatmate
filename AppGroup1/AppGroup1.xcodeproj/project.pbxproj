@@ -63,7 +63,7 @@
 		6D2518D229A3CCFE00D4AE53 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		6D2518D629A3DEC400D4AE53 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		6D2518D829A3FA3800D4AE53 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		6D291C14299CD7ED00220F66 /* Moneki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moneki.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D291C14299CD7ED00220F66 /* Flatmate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flatmate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D291C17299CD7ED00220F66 /* AppGroup1App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup1App.swift; sourceTree = "<group>"; };
 		6D291C19299CD7ED00220F66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6D291C1B299CD7EE00220F66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		6D291C15299CD7ED00220F66 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6D291C14299CD7ED00220F66 /* Moneki.app */,
+				6D291C14299CD7ED00220F66 /* Flatmate.app */,
 				6D291C24299CD7EE00220F66 /* AppGroup1Tests.xctest */,
 				6D291C2E299CD7EE00220F66 /* AppGroup1UITests.xctest */,
 			);
@@ -251,9 +251,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6D291C13299CD7ED00220F66 /* Moneki */ = {
+		6D291C13299CD7ED00220F66 /* Flatmate */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6D291C38299CD7EE00220F66 /* Build configuration list for PBXNativeTarget "Moneki" */;
+			buildConfigurationList = 6D291C38299CD7EE00220F66 /* Build configuration list for PBXNativeTarget "Flatmate" */;
 			buildPhases = (
 				6D291C10299CD7ED00220F66 /* Sources */,
 				6D291C11299CD7ED00220F66 /* Frameworks */,
@@ -263,13 +263,13 @@
 			);
 			dependencies = (
 			);
-			name = Moneki;
+			name = Flatmate;
 			packageProductDependencies = (
 				6D3533E229A3CB0E001BF10D /* FirebaseAuth */,
 				6D3533E429A3CB0E001BF10D /* FirebaseFirestore */,
 			);
 			productName = AppGroup1;
-			productReference = 6D291C14299CD7ED00220F66 /* Moneki.app */;
+			productReference = 6D291C14299CD7ED00220F66 /* Flatmate.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6D291C23299CD7EE00220F66 /* AppGroup1Tests */ = {
@@ -347,7 +347,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6D291C13299CD7ED00220F66 /* Moneki */,
+				6D291C13299CD7ED00220F66 /* Flatmate */,
 				6D291C23299CD7EE00220F66 /* AppGroup1Tests */,
 				6D291C2D299CD7EE00220F66 /* AppGroup1UITests */,
 			);
@@ -435,12 +435,12 @@
 /* Begin PBXTargetDependency section */
 		6D291C26299CD7EE00220F66 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6D291C13299CD7ED00220F66 /* Moneki */;
+			target = 6D291C13299CD7ED00220F66 /* Flatmate */;
 			targetProxy = 6D291C25299CD7EE00220F66 /* PBXContainerItemProxy */;
 		};
 		6D291C30299CD7EE00220F66 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6D291C13299CD7ED00220F66 /* Moneki */;
+			target = 6D291C13299CD7ED00220F66 /* Flatmate */;
 			targetProxy = 6D291C2F299CD7EE00220F66 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -710,7 +710,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6D291C38299CD7EE00220F66 /* Build configuration list for PBXNativeTarget "Moneki" */ = {
+		6D291C38299CD7EE00220F66 /* Build configuration list for PBXNativeTarget "Flatmate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6D291C39299CD7EE00220F66 /* Debug */,

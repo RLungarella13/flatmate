@@ -28,12 +28,6 @@ struct HomeView: View {
         NavigationView{
             ZStack{
                 Color("BackGround").ignoresSafeArea()
-                VStack{
-                    AdaptiveImage(light: Image("logoCatLight"), dark: Image("logoCatDark"))
-                        .scaleEffect(0.5)
-                    Spacer()
-                    
-                }
                 VStack(spacing: 30){
                     Spacer()
                     // LOG IN

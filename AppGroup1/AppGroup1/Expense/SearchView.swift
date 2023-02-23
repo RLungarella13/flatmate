@@ -15,27 +15,29 @@ struct SearchView: View {
     var body: some View {
 
         NavigationView {
-            ScrollView{
-                ForEach(filteredExpense, id: \.id) { expense in
-                    HStack {
-                        SearchCell(expense: expense)
-                            .foregroundColor(.red)
-                        Spacer()
+            ZStack{
+                Color("BackGround").ignoresSafeArea()
+                ScrollView{
+                    ForEach(filteredExpense, id: \.id) { expense in
+                        HStack {
+                            SearchCell(expense: expense)
+                                .foregroundColor(.red)
+                            Spacer()
+                        }
+                        .padding(.horizontal)
                     }
-                    .padding()
+                    Spacer()
+                        .searchable(text: $searchText)
+                        .navigationTitle("Search Transaction")
+                        .navigationBarItems(leading: Button(action:{
+                            
+                            presentationMode.wrappedValue.dismiss()
+                            
+                        }){
+                            Text("Dismiss")
+                        })
                 }
-                Spacer()
-                    .searchable(text: $searchText)
-                    .navigationTitle("Search Transaction")
-                    .navigationBarItems(leading: Button(action:{
-
-                        presentationMode.wrappedValue.dismiss()
-
-                    }){
-                        Text("Dismiss")
-                    })
             }
-
         }
     }
 

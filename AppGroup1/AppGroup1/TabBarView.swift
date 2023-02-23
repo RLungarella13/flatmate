@@ -11,23 +11,23 @@ struct TabBarView: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var obsUser: ObservableBool
     @EnvironmentObject var userLog: ObservableUser
+
+    
     var body: some View {
         
         TabView{
             PinBoardView()
-                
                 .tabItem {
                     Image(systemName: "pin")
                     Text("PinBoard")
                 }
-                .environmentObject(obsUser)
+                
             
             ContentView()
                 .tabItem {
                     Image(systemName: "dollarsign.square")
                     Text("Expenses")
                 }
-                .environmentObject(obsUser)
             
             ProfileView()
                 
@@ -35,13 +35,8 @@ struct TabBarView: View {
                     Image(systemName: "person.crop.square")
                     Text("Account")
             }
-                .environmentObject(obsUser)
             
         }
-//        .fullScreenCover(isPresented: $logInState.isObserving){
-//            HomeView()
-//                .environmentObject(logInState)
-//        }
         
     }
         

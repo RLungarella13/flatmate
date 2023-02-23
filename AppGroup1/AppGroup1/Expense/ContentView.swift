@@ -27,10 +27,7 @@ struct ContentView: View {
                     VStack(spacing: -10){
                         //Titolo centrale con tasto di ricerca
                         titleHomeView()
-                        //ClickableHStack()//Rettangolo con la visualizzazione dei membri
-                        //                            .background(Color("ForeGround"))
-                        //                            .cornerRadius(10)
-                        //                            .padding()
+
                         VStack{
                             Spacer().frame(height: 20)
                             DisclosureGroup(isExpanded: $expanded, content: {

@@ -10,18 +10,19 @@ import Firebase
 
 @main
 struct AppGroup1App: App {
+    
     @StateObject private var dataController = DataController()
     @StateObject var dataManager = DataManager()
     @StateObject var obsUser = ObservableBool()
     @StateObject var dataManagerUser = DataManagerUser()
     @StateObject var userLog = ObservableUser()
-//    @Published var couser = SCoUser(id: "", name: "", surname: "", balance: 0.0, email: "")
+    @StateObject var dataManagerNote = DataManagerNote()
+    
     let persistenceController = PersistenceController.shared
     
     init()
         {
             FirebaseApp.configure()
-            
                 Auth.auth().signInAnonymously() { authResult, error in
                     if let error = error {
                         print("Error signing in anonymously: \(error.localizedDescription)")
@@ -29,18 +30,18 @@ struct AppGroup1App: App {
                         print("Signed in anonymously with UID: \(authResult!.user.uid)")
                     }
                 }
-            
         }
     var body: some Scene {
         WindowGroup {
         
             TabBarView()
                 .environment(\.managedObjectContext, dataController.container.viewContext)
-                .environmentObject(dataManager)
-                .environmentObject(obsUser)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(dataManagerUser)
+                .environmentObject(dataManagerNote)
+                .environmentObject(dataManager)
                 .environmentObject(userLog)
+                .environmentObject(obsUser)
                 
 //           HomeView()
 //                .environment(\.managedObjectContext, dataController.container.viewContext)

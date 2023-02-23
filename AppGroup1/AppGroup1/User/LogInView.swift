@@ -48,7 +48,7 @@ struct LogInView: View {
                 Button(action: {
                     login()
                     dataManagerCoUser.coUsers.forEach{ user in
-                        if user.email == email {
+                        if user.email.lowercased() == email.lowercased() {
                             userLog.email = email
                             userLog.id = user.id
                             userLog.name = user.name

@@ -49,7 +49,7 @@ struct PinBoardView: View {
                                             Spacer()
                                         }
                                         .frame(width: 150, height: 150)
-                                        .background(selectedNotes.contains(note) ? Color.orange : Color("ForeGround"))
+                                        .background(selectedNotes.contains(note) ? Color.accentColor : Color("ForeGround"))
                                         .cornerRadius(10)
                                     }
                                     Text(note.title)
