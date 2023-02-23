@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SBalance: Identifiable{
-    var id: String
-    var desc: String
+struct Login: Identifiable{
+    var id = 0
+    var isLogin: Bool = false
 }

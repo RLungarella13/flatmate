@@ -17,12 +17,21 @@ struct AppGroup1App: App {
     @StateObject var dataManagerUser = DataManagerUser()
     @StateObject var userLog = ObservableUser()
     @StateObject var dataManagerNote = DataManagerNote()
+    @State var isFlagOn = false
+    
     
     let persistenceController = PersistenceController.shared
+    @State private var isLogged: Bool = false
+    
+    let defaults = UserDefaults.standard
+    
     
     init()
         {
-            FirebaseApp.configure()
+            isFlagOn = defaults.bool(forKey: "isFlagOn")
+            defaults.set(self.isFlagOn, forKey: "isFlagOn")
+            if !isFlagOn{
+                FirebaseApp.configure()
                 Auth.auth().signInAnonymously() { authResult, error in
                     if let error = error {
                         print("Error signing in anonymously: \(error.localizedDescription)")
@@ -30,11 +39,13 @@ struct AppGroup1App: App {
                         print("Signed in anonymously with UID: \(authResult!.user.uid)")
                     }
                 }
+            }
+            
         }
     var body: some Scene {
         WindowGroup {
         
-            TabBarView()
+            TabBarView(isFlagOn: $isFlagOn)
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(dataManagerUser)
@@ -42,6 +53,7 @@ struct AppGroup1App: App {
                 .environmentObject(dataManager)
                 .environmentObject(userLog)
                 .environmentObject(obsUser)
+                
                 
 //           HomeView()
 //                .environment(\.managedObjectContext, dataController.container.viewContext)

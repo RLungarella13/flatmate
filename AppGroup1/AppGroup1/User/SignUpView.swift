@@ -9,20 +9,21 @@ import SwiftUI
 import Firebase
 
 struct SignUpView: View {
-    
+ 
     @State var email = ""
     @State var password = ""
     
     @StateObject var dataManagerCoUser = DataManagerCoUser()
     @EnvironmentObject var obsUser: ObservableBool
     @EnvironmentObject var userLog: ObservableUser
+    @Binding var isFlagOn: Bool
     
     @State private var newUser = ""
     @State private var userIsLoggedIn = false
     @State private var name = ""
     @State private var surname = ""
     @State private var balance : Float = 0.0
-    
+   
     var body: some View {
         
         
@@ -100,7 +101,13 @@ struct SignUpView: View {
             if error != nil{
                 print(error!.localizedDescription)
             }
-            else{obsUser.isLoggedIn = true}
+            else{
+                obsUser.isLoggedIn = true
+                self.isFlagOn = true
+                let defaults = UserDefaults.standard
+                self.isFlagOn = defaults.bool(forKey: "isFlagOn")
+                defaults.set(self.isFlagOn, forKey: "isFlagOn")
+            }
         }
         
     }
@@ -110,8 +117,8 @@ struct SignUpView: View {
     }
 }
 
-struct SignUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUpView()
-    }
-}
+//struct SignUpView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SignUpView()
+//    }
+//}

@@ -11,7 +11,7 @@ struct TabBarView: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var obsUser: ObservableBool
     @EnvironmentObject var userLog: ObservableUser
-
+    @Binding var isFlagOn: Bool
     
     var body: some View {
         
@@ -29,7 +29,7 @@ struct TabBarView: View {
                     Text("Expenses")
                 }
             
-            ProfileView()
+            ProfileView(isFlagOn: $isFlagOn)
                 
                 .tabItem {
                     Image(systemName: "person.crop.square")
@@ -42,8 +42,8 @@ struct TabBarView: View {
         
 }
 
-struct TabBarView_Previews: PreviewProvider {
-    static var previews: some View {
-        TabBarView()
-    }
-}
+//struct TabBarView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TabBarView()
+//    }
+//}

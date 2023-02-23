@@ -15,10 +15,11 @@ struct HomeView: View {
     @EnvironmentObject var dataManager: DataManager
     @EnvironmentObject var obsUser: ObservableBool
     @State var userLog = ObservableUser()
+    @Binding var isFlagOn: Bool
     
     var body: some View{
         if obsUser.isLoggedIn{
-            TabBarView()
+            TabBarView(isFlagOn: $isFlagOn)
                 .environmentObject(userLog)
         }else{
             content
@@ -31,7 +32,7 @@ struct HomeView: View {
                 VStack(spacing: 30){
                     Spacer()
                     // LOG IN
-                    NavigationLink(destination: LogInView()){
+                    NavigationLink(destination: LogInView(isFlagOn: $isFlagOn)){
                         Text("Log In")
                             .foregroundColor(.white)
                             .bold()
@@ -43,7 +44,7 @@ struct HomeView: View {
                     .foregroundColor(.accentColor)
                     .shadow(radius: 2)
                     // SIGN UP
-                    NavigationLink(destination: SignUpView()){
+                    NavigationLink(destination: SignUpView(isFlagOn: $isFlagOn)){
                         Text("Sign Up")
                             .foregroundColor(.white)
                             .bold()
@@ -74,12 +75,12 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-            .environmentObject(DataManager())
-    }
-}
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView(isFlagOn: $isFlagOn)
+//            .environmentObject(DataManager())
+//    }
+//}
 
 struct AdaptiveImage: View {
     @Environment(\.colorScheme) var colorScheme

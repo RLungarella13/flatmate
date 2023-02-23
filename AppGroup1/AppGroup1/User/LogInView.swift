@@ -9,13 +9,16 @@ import SwiftUI
 import Firebase
 
 struct LogInView: View {
-    
+    @Environment(\.managedObjectContext) private var viewContext
     @State var email = ""
     @State var password = ""
+    @Binding var isFlagOn: Bool
     
     @EnvironmentObject var obsUser: ObservableBool
     @EnvironmentObject var userLog: ObservableUser
     @StateObject var dataManagerCoUser = DataManagerCoUser()
+    
+    
     var body: some View {
         ZStack{
             Color("BackGround").ignoresSafeArea()
@@ -35,16 +38,16 @@ struct LogInView: View {
                     }
                 }
                 .frame(height: 130)
-                HStack{
-                    Button(action: {
-                        
-                    }){
-                        Text("Forgotten Password?")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 16))
-                            .underline()
-                    }
-                }
+//                HStack{
+//                    Button(action: {
+//                        
+//                    }){
+//                        Text("Forgotten Password?")
+//                            .foregroundColor(.gray)
+//                            .font(.system(size: 16))
+//                            .underline()
+//                    }
+//                }
                 Button(action: {
                     login()
                     dataManagerCoUser.coUsers.forEach{ user in
@@ -82,15 +85,19 @@ struct LogInView: View {
                 print (error!.localizedDescription)
             }else{
                 obsUser.isLoggedIn = true
+                self.isFlagOn = true
+                let defaults = UserDefaults.standard
+                self.isFlagOn = defaults.bool(forKey: "isFlagOn")
+                defaults.set(self.isFlagOn, forKey: "isFlagOn")
             }
             userLog.email = email
         }
     }
 }
 
-struct LogInView_Previews: PreviewProvider {
-    static var previews: some View {
-        LogInView()
-    }
-}
+//struct LogInView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LogInView()
+//    }
+//}
 

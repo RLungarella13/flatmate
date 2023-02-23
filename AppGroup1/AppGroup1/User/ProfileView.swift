@@ -13,12 +13,14 @@ struct ProfileView: View {
     @EnvironmentObject var obsUser: ObservableBool
     @StateObject var dataManagerCoUser = DataManagerCoUser()
     @EnvironmentObject var userLog: ObservableUser
+    @Binding var isFlagOn: Bool
+    
     var body: some View {
-        if obsUser.isLoggedIn{
+        if obsUser.isLoggedIn {
             content
                 .environmentObject(userLog)
         }else{
-            HomeView()
+            HomeView(isFlagOn: $isFlagOn)
         }
     }
     var content: some View {
@@ -75,6 +77,10 @@ struct ProfileView: View {
             print("Errore durante il logout: \(error.localizedDescription)")
         }
         obsUser.isLoggedIn = false
+        self.isFlagOn = false
+        let defaults = UserDefaults.standard
+        self.isFlagOn = defaults.bool(forKey: "isFlagOn")
+        defaults.set(self.isFlagOn, forKey: "isFlagOn")
     }
 }
 
@@ -105,7 +111,7 @@ struct accountSettings: View{
                         .bold()
                         .foregroundColor(.primary)
                     
-                    Text(userLog.email)
+                    Text(userLog.email.lowercased())
                         .font(.system(size: 14))
                     
                 }
@@ -170,9 +176,9 @@ struct feedbackSettings: View{
         }
     }
 }
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}
+//struct ProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfileView()
+//    }
+//}
 

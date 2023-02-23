@@ -41,14 +41,8 @@ struct PersistenceController {
         
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<5 {
-            let newExpense = Expense(context: viewContext)
-            
-            newExpense.title = "newEmpty"
-            newExpense.desc = "newEmpty"
-            newExpense.total = 0.0
-        }
-        let newBalance = Balance(context: viewContext)
+        
+        let newLogin = LogIn().isLogin
         
         do {
             try viewContext.save()
