@@ -20,13 +20,13 @@ struct AppGroup1App: App {
         {
             FirebaseApp.configure()
             
-//                Auth.auth().signInAnonymously() { authResult, error in
-//                    if let error = error {
-//                        print("Error signing in anonymously: \(error.localizedDescription)")
-//                    } else {
-//                        print("Signed in anonymously with UID: \(authResult!.user.uid)")
-//                    }
-//                }
+                Auth.auth().signInAnonymously() { authResult, error in
+                    if let error = error {
+                        print("Error signing in anonymously: \(error.localizedDescription)")
+                    } else {
+                        print("Signed in anonymously with UID: \(authResult!.user.uid)")
+                    }
+                }
             
         }
     var body: some Scene {

@@ -13,7 +13,7 @@ struct AddExpenseView: View {
     
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var obsUser: ObservableBool
-    @Environment(\.managedObjectContext) private var viewContext
+//    @Environment(\.managedObjectContext) private var viewContext
     @StateObject var dataManager = DataManager()
     @StateObject var dataManagerCoUser = DataManagerCoUser()
     @EnvironmentObject var dataManagerUser: DataManagerUser
@@ -105,7 +105,18 @@ struct AddExpenseView: View {
                 Text("Cancel")
             }, trailing: Button(action:{
                 
-                saveNewExpense()
+//                saveNewExpense()
+                if isPersonal{
+                    let id = generateUniqueString()
+                    dataManager.addExpense(id: id, title: title, desc: desc, total: total, date: selectedDate)
+                    if isIncome{
+                        
+                       dataManagerUser.addUser(id: "TMvu9tQK3vHiNpM6Hp2a", balance: total)
+                        
+                    }
+                }
+//                countExpenses = total
+                dataManagerUser.user.balance += total
                 dismiss()
                     
                 
@@ -116,38 +127,27 @@ struct AddExpenseView: View {
         
     }
     
-    func saveNewExpense() {
-        
-        @EnvironmentObject var obsUser: ObservableBool
-        if obsUser.isLoggedIn{
-            let id = generateUniqueString()
-            dataManager.addExpense(id: id, title: title, desc: desc, total: total, date: selectedDate)
-            if isIncome{
-                
-                //                        dataManagerUser.addUser(id: "TMvu9tQK3vHiNpM6Hp2a", balance: total)
-                
-            }
-            else{
-                let expense = Expense(context: viewContext)
-                
-                expense.title = title
-                expense.desc = desc
-                expense.total = Float(total)
-                expense.date = selectedDate
-                expense.uID = generateUniqueString()
-                
-                do {
-                    try viewContext.save()
-                    print("user saved")
-                } catch {
-                    
-                    print(error.localizedDescription)
-                    
-                }
-            }
-        }
-
-    }
+//    func saveNewExpense() {
+//
+//
+//        let expense = Expense(context: viewContext)
+//
+//        expense.title = title
+//        expense.desc = desc
+//        expense.total = Float(total)
+//        expense.date = selectedDate
+//        expense.uID = generateUniqueString()
+//
+//        do {
+//            try viewContext.save()
+//            print("user saved")
+//        } catch {
+//
+//            print(error.localizedDescription)
+//
+//        }
+//
+//    }
     func generateUniqueString() -> String {
         let uuid = UUID()
         return uuid.uuidString
