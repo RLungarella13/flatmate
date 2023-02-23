@@ -11,7 +11,7 @@ struct SNote: Identifiable, Hashable {
     let id : String
     var title: String
     var content: String
-    var date = Date()
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
@@ -22,11 +22,11 @@ struct SNote: Identifiable, Hashable {
 }
 
 struct PinBoardView: View {
-    @State var notes = [SNote]()
     @State var isAddingNote = false
     @State var selectedNote: SNote?
     @State var isEditing = false
-    @State var selectedNotes: Set<SNote> = []
+    //@State var selectedNotes: Set<SNote> = []
+    @State var selectedNotes =  [SNote]()
     @StateObject var dataManagerNote = DataManagerNote()
     var creationDate = Date()
     
@@ -43,9 +43,11 @@ struct PinBoardView: View {
                                     Button(action: { 
                                         if isEditing {
                                             if selectedNotes.contains(note) {
-                                                removeNote(selectedNote: note)
+                                                var index = selectedNotes.firstIndex(of: note)
+                                                selectedNotes.remove(at: index!)
+                                                
                                             } else {
-                                                dataManagerNote.addNote(id: note.id, title: note.title, content: note.content)
+                                                selectedNotes.insert(note, at: selectedNotes.count)
                                             }
                                         } else {
                                             selectedNote = note
@@ -84,7 +86,7 @@ struct PinBoardView: View {
                     HStack{
                         Spacer()
                         Button(action: {
-                            selectedNote = nil
+                            
                             isAddingNote.toggle()
                         }) {
                             Image(systemName: "plus")
@@ -107,10 +109,9 @@ struct PinBoardView: View {
                     HStack {
                         if isEditing {
                             Button(action: {
-                                notes.removeAll { note in
-                                    selectedNotes.contains(note)
-                                }
+                                removeNotes(selectedNotes: selectedNotes)
                                 selectedNotes.removeAll()
+                                
                                 isEditing = false
                             }) {
                                 Text("Delete")
@@ -125,27 +126,29 @@ struct PinBoardView: View {
                     }
             )
             .fullScreenCover(isPresented: $isAddingNote) {
-                CreateNoteView(notes: $notes, isPresented: $isAddingNote, noteTitle: "", noteContent: "", selectedNote: $selectedNote)
+                CreateNoteView(notes: $dataManagerNote.notes, isPresented: $isAddingNote, noteTitle: "", noteContent: "", selectedNote: $selectedNote)
             }
         }
     }
-    func removeNote(selectedNote: SNote) {
+    func removeNotes(selectedNotes: [SNote]){
         let db = Firestore.firestore()
-        
-        db.collection("Note").document(selectedNote.id).getDocument { (document, error) in
-            if let document = document, document.exists {
-                db.collection("Note").document(selectedNote.id).delete()
+        selectedNotes.forEach{ note in
+            db.collection("Note").document(note.id).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    db.collection("Note").document(note.id).delete()
+                }
+                else{
+                    print("ERRORE \(note.id) \(db.collection("Note").document(note.id).documentID)")
+                }
+                
             }
-            else{
-                print("ERRORE \(selectedNote.id) \(db.collection("Note").document(selectedNote.id).documentID)")
-            }
-            
+
         }
+        
+
     }
+
 }
-
-
-
 
 
 struct CreateNoteView: View {
@@ -179,6 +182,7 @@ struct CreateNoteView: View {
                             noteTitle = selectedNote!.title
                             noteContent = selectedNote!.content
                         }
+
                     }
                 
             }
@@ -207,17 +211,17 @@ struct CreateNoteView: View {
                 trailing: Button("Done") {
                     
                     if selectedNote != nil {
-                        let index = notes.firstIndex(where: { $0.id == selectedNote!.id })!
-                        notes[index].title = noteTitle
-                        notes[index].content = noteContent
+                        let index = notes.firstIndex(where: {$0.id == selectedNote!.id})!
+                        notes[index].title = selectedNote!.title
+                        notes[index].content = selectedNote!.content
                         let db = Firestore.firestore()
                         
                         db.collection("Note").document(notes[index].id).getDocument { (document, error) in
                             if let document = document, document.exists {
                                 db.collection("Note").document(notes[index].id).setData([
                                     "id": notes[index].id,
-                                    "title": noteTitle,
-                                    "content": noteContent,
+                                    "title": notes[index].title,
+                                    "content": notes[index].content,
                                     
                                 ])
                             }
