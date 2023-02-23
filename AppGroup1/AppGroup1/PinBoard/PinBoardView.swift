@@ -41,11 +41,14 @@ struct PinBoardView: View {
                                         }
                                     }){
                                         VStack{
-                                            Text(note.content)
-                                                .font(.system(size: 10))
-                                                .foregroundColor(.primary)
-                                                .multilineTextAlignment(.leading)
-                                                .padding(10)
+                                            HStack{
+                                                Text(note.content)
+                                                    .font(.system(size: 10))
+                                                    .foregroundColor(.primary)
+                                                    .multilineTextAlignment(.leading)
+                                                    .padding(20)
+                                                Spacer()
+                                            }
                                             Spacer()
                                         }
                                         .frame(width: 150, height: 150)
@@ -150,6 +153,9 @@ struct CreateNoteView: View {
     @StateObject var dataManagerNote = DataManagerNote()
     @State var hasBulletPoint = false
     
+    // Variables for Bullet point
+    let bulletPointDot = "• "
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -162,7 +168,8 @@ struct CreateNoteView: View {
                     .padding(.horizontal)
                     .onChange(of: noteContent) { [noteContent] newText in
                         if newText.suffix(1) == "\n" && newText > noteContent && hasBulletPoint{
-                            self.noteContent.append("\u{2022} ")
+                            
+                            self.noteContent.append(bulletPointDot)
                             
                         }
                     }
@@ -173,6 +180,7 @@ struct CreateNoteView: View {
                         }
 
                     }
+                    
                 
             }
             .padding()
@@ -181,10 +189,11 @@ struct CreateNoteView: View {
                     HStack {
                         Button(action: {
                             hasBulletPoint.toggle()
+
                         }) {
                             Image(systemName: "checklist.unchecked")
                         }
-                        
+
                         Spacer()
                         
                     }
