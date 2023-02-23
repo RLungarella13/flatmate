@@ -43,7 +43,7 @@ struct PinBoardView: View {
                                     Button(action: { 
                                         if isEditing {
                                             if selectedNotes.contains(note) {
-                                                dataManagerNote.notes.de
+                                                removeNote(selectedNote: note)
                                             } else {
                                                 dataManagerNote.addNote(id: note.id, title: note.title, content: note.content)
                                             }
@@ -129,7 +129,7 @@ struct PinBoardView: View {
             }
         }
     }
-    func removeNote() {
+    func removeNote(selectedNote: SNote) {
         let db = Firestore.firestore()
         
         db.collection("Note").document(selectedNote.id).getDocument { (document, error) in
