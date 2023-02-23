@@ -33,7 +33,7 @@ class DataManager: ObservableObject{
                     let title = data["title"] as? String ?? ""
                     let desc = data["desc"] as? String ?? ""
                     let total = data["total"] as? Float ?? 0
-                    let date = data["date"] as? Date ?? Date()
+                    let date = data["date"] as? Date ?? Date() //possibile problema
                     let expense = SExpense( id: id, title: title, desc: desc, total: total, date: date)
                     
                     switch change.type {

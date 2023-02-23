@@ -64,9 +64,5 @@ class DataManagerCoUser: ObservableObject{
         }
     }
     
-    
-    
-    
-    
 }
 

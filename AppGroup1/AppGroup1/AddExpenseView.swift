@@ -13,7 +13,7 @@ struct AddExpenseView: View {
     
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var obsUser: ObservableBool
-  //  @Environment(\.managedObjectContext) private var viewContext
+//    @Environment(\.managedObjectContext) private var viewContext
     @StateObject var dataManager = DataManager()
     @StateObject var dataManagerCoUser = DataManagerCoUser()
     @EnvironmentObject var dataManagerUser: DataManagerUser
@@ -110,7 +110,7 @@ struct AddExpenseView: View {
                     dataManager.addExpense(id: id, title: title, desc: desc, total: total, date: selectedDate)
                     if isIncome{
                         
-                        dataManagerUser.addUser(id: "TMvu9tQK3vHiNpM6Hp2a", balance: total)
+                       dataManagerUser.addUser(id: "TMvu9tQK3vHiNpM6Hp2a", balance: total)
                         
                     }
                 }
@@ -135,7 +135,7 @@ struct AddExpenseView: View {
 //        expense.desc = desc
 //        expense.total = Float(total)
 //        expense.date = selectedDate
-//        expense.uID = UUID()
+//        expense.uID = generateUniqueString()
 //
 //        do {
 //            try viewContext.save()
