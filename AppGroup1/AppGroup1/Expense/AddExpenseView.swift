@@ -26,7 +26,7 @@ struct AddExpenseView: View {
     
     @State private var selectedDate = Date()
     
-    @State var isExpense: Bool = false
+    @State var isExpense: Bool = true
 
 //    @Binding private var countExpenses: Int
     
