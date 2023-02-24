@@ -185,21 +185,25 @@ struct CreateNoteView: View {
             }
             .padding()
             .toolbar {
-                ToolbarItem(placement: .keyboard) {
+                ToolbarItemGroup(placement: .keyboard) {
                     HStack {
                         Button(action: {
                             hasBulletPoint.toggle()
-
                         }) {
-                            Image(systemName: "checklist.unchecked")
+                            Image(systemName: "list.bullet")
                         }
+                        .foregroundColor(hasBulletPoint == true ? .accentColor : .primary)
+                        .bold()
+                        
 
                         Spacer()
                         
                     }
+                    
                     .padding(.horizontal)
                     
                 }
+                
             }
             .navigationBarTitle(selectedNote != nil ? "Edit Note" : "New Note", displayMode: .inline)
             .navigationBarItems(

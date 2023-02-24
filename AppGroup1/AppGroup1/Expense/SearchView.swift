@@ -63,9 +63,9 @@ struct SearchCell: View{
         NavigationLink(destination: EditView(expense: expense) ){
             HStack{
                 Spacer()
-                Image(systemName: "cart")
-                    .foregroundColor(.accentColor)
-                    .font(.system(size: 30))
+                Image(systemName: expense.total >= 0 ? "cart.badge.plus" : "cart.badge.minus")
+                        .foregroundColor(.accentColor)
+                        .font(.system(size: 30))
 
                 Spacer()
                 VStack(alignment: .leading){
@@ -82,7 +82,8 @@ struct SearchCell: View{
                         Spacer()
 
                         Text(String(format: "%.2f", expense.total)+"€")
-                            .foregroundColor(.primary)
+                            .bold()
+                            .foregroundColor(expense.total >= 0 ? .green : .red)
                     }
                 }.padding()
                 Spacer()
