@@ -12,6 +12,7 @@ struct SignUpView: View {
  
     @State var email = ""
     @State var password = ""
+    @State var confirmPwd = ""
     
     @StateObject var dataManagerCoUser = DataManagerCoUser()
     @EnvironmentObject var obsUser: ObservableBool
@@ -23,6 +24,7 @@ struct SignUpView: View {
     @State private var name = ""
     @State private var surname = ""
     @State private var balance : Float = 0.0
+    @State var isPresented = false
    
     var body: some View {
         
@@ -60,21 +62,26 @@ struct SignUpView: View {
                             }
                         }
                         HStack{
-                            SecureField("Confirm Password", text: $password)
+                            SecureField("Confirm Password", text: $confirmPwd)
                         }
                     }
                 }
                 .frame(height: 450)
                 Button(action: {
                     //Variable for not showing full screen page
-                    register()
-                    let id = generateUniqueString()
-                    dataManagerCoUser.addCoUser(id: id, name: name, surname: surname,balance: balance, email: email)
-                    userLog.id = id
-                    userLog.name = name
-                    userLog.surname = surname
-                    userLog.email = email
-
+                    if(password == confirmPwd){
+                        register()
+                        let id = generateUniqueString()
+                        dataManagerCoUser.addCoUser(id: id, name: name, surname: surname,balance: balance, email: email)
+                        userLog.id = id
+                        userLog.name = name
+                        userLog.surname = surname
+                        userLog.email = email
+                        isPresented = true
+                    }
+                    
+                        
+                    
                 }){
                     Text("Sign Up")
                         .foregroundColor(.white)
@@ -85,8 +92,9 @@ struct SignUpView: View {
                 .buttonStyle(.borderedProminent)
                 .foregroundColor(.accentColor)
                 .shadow(radius: 2)
-                Spacer()
                 
+                Spacer()
+                    
             }
         }
         

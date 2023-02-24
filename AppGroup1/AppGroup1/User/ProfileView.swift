@@ -113,7 +113,7 @@ struct accountSettings: View{
                     
                     Text(userLog.email.lowercased())
                         .font(.system(size: 14))
-                    
+                        .foregroundColor(.accentColor)
                 }
                 Spacer()
 //                Image(systemName: "chevron.right")
