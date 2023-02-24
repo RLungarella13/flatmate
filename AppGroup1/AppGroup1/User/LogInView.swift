@@ -13,7 +13,7 @@ struct LogInView: View {
     @State var email = ""
     @State var password = ""
     @Binding var isFlagOn: Bool
-    
+    @State var isPresented = false
     @EnvironmentObject var obsUser: ObservableBool
     @EnvironmentObject var userLog: ObservableUser
     @StateObject var dataManagerCoUser = DataManagerCoUser()
@@ -74,7 +74,9 @@ struct LogInView: View {
                 
             }
         }
-        
+        .alert(isPresented: $isPresented) {
+            Alert(title: Text("Wrong Credentials"), message: Text(""), dismissButton: .default(Text("OK")))
+                }
         
 
     }
@@ -83,6 +85,7 @@ struct LogInView: View {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error != nil {
                 print (error!.localizedDescription)
+                isPresented = true
             }else{
                 obsUser.isLoggedIn = true
                 self.isFlagOn = true

@@ -65,6 +65,7 @@ struct SignUpView: View {
                             SecureField("Confirm Password", text: $confirmPwd)
                         }
                     }
+                    
                 }
                 .frame(height: 450)
                 Button(action: {
@@ -77,6 +78,8 @@ struct SignUpView: View {
                         userLog.name = name
                         userLog.surname = surname
                         userLog.email = email
+                        
+                    }else{
                         isPresented = true
                     }
                     
@@ -96,7 +99,11 @@ struct SignUpView: View {
                 Spacer()
                     
             }
+            
         }
+        .alert(isPresented: $isPresented) {
+            Alert(title: Text("Wrong Password"), message: Text(""), dismissButton: .default(Text("OK")))
+                }
         
     }
     
