@@ -1,5 +1,7 @@
 
-<img align="left" alt="Flatmate" width='25px' style="padding-right:5px;" src="Flatmate/flatmateLogo.png" /> # FlatMate
+<img align="left" alt="Flatmate" width='40px' style="padding-right:5px;" src="Flatmate/flatmateLogo.png" /> 
+
+# FlatMate
 
 Flatmate is a mobile application that allows you to manage the expenses of a shared apartment. It is possible to create a group, add expenses and view statistics on the expenses of the group. The application is developed in SwiftUI and uses Firebase as a database. The application is developed only for iOS.
 
